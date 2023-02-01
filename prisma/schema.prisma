@@ -1,0 +1,77 @@
+// This is your Prisma schema file
+// learn more about it in the docs https//pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
+  name       String?
+  cart       Cart? // Does not exist in the database
+  created_at DateTime @default(now())
+}
+
+model Cart {
+  id         Int         @id @default(autoincrement())
+  item       CartItems[]
+  user       User        @relation(fields: [user_id], references: [id]) // Relation fields define connections between models at the Prisma level and do not exist in the database
+  user_id    Int         @unique // foreign key that connects User and Cart and does not exist in the database
+  created_at DateTime    @default(now())
+}
+
+model CartItems {
+  id         Int      @id @default(autoincrement())
+  quantity   Int
+  product    Product  @relation(fields: [product_id], references: [id]) // one to many between Item and Product
+  product_id Int      @unique
+  cart       Cart     @relation(fields: [cart_id], references: [id]) // one to many between Cart and Item
+  cart_id    Int
+  created_at DateTime @default(now())
+}
+
+model Product {
+  id            Int        @id @default(autoincrement())
+  name          String
+  full_name     String
+  manufacturer  String
+  stock         Int
+  shipped_by    String
+  free_shipping Boolean
+  created_at    DateTime   @default(now())
+  item          CartItems?
+  category      Category   @relation(fields: [category_id], references: [id])
+  category_id   Int
+  cpu_specs     CPUSpecs?
+}
+
+model Category {
+  id         Int       @id @default(autoincrement())
+  name       String    @unique
+  created_at DateTime  @default(now())
+  product    Product[]
+}
+
+model CPUSpecs {
+  id                  Int      @id @default(autoincrement())
+  cores               Int
+  base_clock          Float
+  boost_clock         Float
+  l3_cache            Int
+  tdp                 Int
+  price               Float
+  discount            Int
+  integrated_graphics Boolean
+  reviews             Int
+  stars               Float
+  release_date        DateTime
+  created_at          DateTime @default(now())
+  product             Product  @relation(fields: [product_id], references: [id]) // one to many between Item and Product
+  product_id          Int      @unique @default(0)
+}
