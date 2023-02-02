@@ -29,7 +29,7 @@ export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, categor
       try {
         const product = await prisma.product.create({
           data: {
-            // product_id: component.id,
+            product_id: component.id,
             name: component.model,
             full_name: component.title,
             manufacturer: component.brand,
