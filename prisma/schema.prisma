@@ -30,25 +30,41 @@ model CartItems {
   id         Int      @id @default(autoincrement())
   quantity   Int
   product    Product  @relation(fields: [product_id], references: [id]) // one to many between Item and Product
-  product_id Int      @unique
+  product_id String   @unique
   cart       Cart     @relation(fields: [cart_id], references: [id]) // one to many between Cart and Item
   cart_id    Int
   created_at DateTime @default(now())
 }
 
 model Product {
-  id            Int        @id @default(autoincrement())
-  name          String
-  full_name     String
-  manufacturer  String
-  stock         Int
-  shipped_by    String
-  free_shipping Boolean
-  created_at    DateTime   @default(now())
-  item          CartItems?
-  category      Category   @relation(fields: [category_id], references: [id])
-  category_id   Int
-  cpu_specs     CPUSpecs?
+  id               String            @id
+  name             String
+  full_name        String
+  manufacturer     String
+  stock            Int
+  shipped_by       String
+  free_shipping    Boolean
+  price            Float?
+  discount         Int?
+  reviews          Int?
+  stars            Float?
+  img              String?
+  release_date     DateTime
+  created_at       DateTime          @default(now())
+  item             CartItems?
+  category         Category          @relation(fields: [category_id], references: [id])
+  category_id      Int
+  CPUSpecs         CPUSpecs?
+  PowerSupplySpecs PowerSupplySpecs?
+  CaseFanSpecs     CaseFanSpecs?
+  RAMSpecs         RAMSpecs?
+  MouseSpecs       MouseSpecs?
+  KeyboardSpecs    KeyboardSpecs?
+  CPUFanSpecs      CPUFanSpecs?
+  CaseSpecs        CaseSpecs?
+  StorageSpecs     StorageSpecs?
+  GPUSpecs         GPUSpecs?
+  MotherboardSpecs MotherboardSpecs?
 }
 
 model Category {
@@ -58,20 +74,107 @@ model Category {
   product    Product[]
 }
 
+model PowerSupplySpecs {
+  id         Int     @id @default(autoincrement())
+  power      String?
+  color      String?
+  efficiency String?
+  product    Product @relation(fields: [product_id], references: [id]) // one to many between Item and Product
+  product_id String  @unique
+}
+
+model CaseFanSpecs {
+  id          Int     @id @default(autoincrement())
+  rpm         String
+  air_flow    String
+  noise_level String
+  product     Product @relation(fields: [product_id], references: [id]) // one to many between Item and Product
+  product_id  String  @unique
+}
+
+model RAMSpecs {
+  id         Int     @id @default(autoincrement())
+  size       String
+  quantity   String
+  type       String
+  product    Product @relation(fields: [product_id], references: [id]) // one to many between Item and Product
+  product_id String  @unique
+}
+
+model MouseSpecs {
+  id           Int     @id @default(autoincrement())
+  track_method String
+  color        String
+  wireless     String
+  product      Product @relation(fields: [product_id], references: [id]) // one to many between Item and Product
+  product_id   String  @unique
+}
+
+model KeyboardSpecs {
+  id         Int     @id @default(autoincrement())
+  style      String
+  backlit    String
+  color      String
+  wireless   String
+  product    Product @relation(fields: [product_id], references: [id]) // one to many between Item and Product
+  product_id String  @unique
+}
+
+model CPUFanSpecs {
+  id          Int     @id @default(autoincrement())
+  rpm         String
+  color       String
+  noise_level String
+  product     Product @relation(fields: [product_id], references: [id]) // one to many between Item and Product
+  product_id  String  @unique
+}
+
+model CaseSpecs {
+  id           Int     @id @default(autoincrement())
+  side_panel   String
+  color        String
+  cabinet_type String
+  product      Product @relation(fields: [product_id], references: [id]) // one to many between Item and Product
+  product_id   String  @unique
+}
+
+model StorageSpecs {
+  id                Int     @id @default(autoincrement())
+  storage_interface String
+  rpm               String
+  type              String
+  cache_memory      String
+  product           Product @relation(fields: [product_id], references: [id]) // one to many between Item and Product
+  product_id        String  @unique
+}
+
 model CPUSpecs {
-  id                  Int      @id @default(autoincrement())
+  id                  Int     @id @default(autoincrement())
+  socket              String?
   cores               Int
   base_clock          Float
   boost_clock         Float
   l3_cache            Int
   tdp                 Int
-  price               Float
-  discount            Int
   integrated_graphics Boolean
-  reviews             Int
-  stars               Float
-  release_date        DateTime
-  created_at          DateTime @default(now())
-  product             Product  @relation(fields: [product_id], references: [id]) // one to many between Item and Product
-  product_id          Int      @unique @default(0)
+  product             Product @relation(fields: [product_id], references: [id]) // one to many between Item and Product
+  product_id          String  @unique
+}
+
+model GPUSpecs {
+  id                Int     @id @default(autoincrement())
+  storage_interface String
+  memory            String
+  clock_speed       String
+  product           Product @relation(fields: [product_id], references: [id]) // one to many between Item and Product
+  product_id        String  @unique
+}
+
+model MotherboardSpecs {
+  id           Int     @id @default(autoincrement())
+  form_factor  String
+  memory_slots String
+  socket_type  String
+  product      Product @relation(fields: [product_id], references: [id]) // one to many between Item and Product
+  product_id   String  @unique
 }
