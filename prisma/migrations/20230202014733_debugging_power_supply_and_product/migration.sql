@@ -21,7 +21,7 @@ CREATE TABLE "Cart" (
 CREATE TABLE "CartItems" (
     "id" SERIAL NOT NULL,
     "quantity" INTEGER NOT NULL,
-    "product_id" INTEGER NOT NULL,
+    "product_id" TEXT NOT NULL,
     "cart_id" INTEGER NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -31,12 +31,19 @@ CREATE TABLE "CartItems" (
 -- CreateTable
 CREATE TABLE "Product" (
     "id" SERIAL NOT NULL,
+    "product_id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "full_name" TEXT NOT NULL,
     "manufacturer" TEXT NOT NULL,
     "stock" INTEGER NOT NULL,
     "shipped_by" TEXT NOT NULL,
     "free_shipping" BOOLEAN NOT NULL,
+    "price" DOUBLE PRECISION,
+    "discount" INTEGER,
+    "reviews" INTEGER,
+    "stars" DOUBLE PRECISION,
+    "img" TEXT,
+    "release_date" TIMESTAMP(3) NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "category_id" INTEGER NOT NULL,
 
@@ -53,23 +60,14 @@ CREATE TABLE "Category" (
 );
 
 -- CreateTable
-CREATE TABLE "CPUSpecs" (
+CREATE TABLE "PowerSupplySpecs" (
     "id" SERIAL NOT NULL,
-    "cores" INTEGER NOT NULL,
-    "base_clock" DOUBLE PRECISION NOT NULL,
-    "boost_clock" DOUBLE PRECISION NOT NULL,
-    "l3_cache" INTEGER NOT NULL,
-    "tdp" INTEGER NOT NULL,
-    "price" DOUBLE PRECISION NOT NULL,
-    "discount" INTEGER NOT NULL,
-    "integrated_graphics" BOOLEAN NOT NULL,
-    "reviews" INTEGER NOT NULL,
-    "stars" DOUBLE PRECISION NOT NULL,
-    "release_date" TIMESTAMP(3) NOT NULL,
-    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "category_id" INTEGER NOT NULL,
+    "power" TEXT,
+    "color" TEXT,
+    "efficiency" TEXT,
+    "product_id" TEXT NOT NULL,
 
-    CONSTRAINT "CPUSpecs_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PowerSupplySpecs_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -82,19 +80,19 @@ CREATE UNIQUE INDEX "Cart_user_id_key" ON "Cart"("user_id");
 CREATE UNIQUE INDEX "CartItems_product_id_key" ON "CartItems"("product_id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Product_category_id_key" ON "Product"("category_id");
+CREATE UNIQUE INDEX "Product_product_id_key" ON "Product"("product_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Category_name_key" ON "Category"("name");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "CPUSpecs_category_id_key" ON "CPUSpecs"("category_id");
+CREATE UNIQUE INDEX "PowerSupplySpecs_product_id_key" ON "PowerSupplySpecs"("product_id");
 
 -- AddForeignKey
 ALTER TABLE "Cart" ADD CONSTRAINT "Cart_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "CartItems" ADD CONSTRAINT "CartItems_product_id_fkey" FOREIGN KEY ("product_id") REFERENCES "Product"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "CartItems" ADD CONSTRAINT "CartItems_product_id_fkey" FOREIGN KEY ("product_id") REFERENCES "Product"("product_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "CartItems" ADD CONSTRAINT "CartItems_cart_id_fkey" FOREIGN KEY ("cart_id") REFERENCES "Cart"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -103,4 +101,4 @@ ALTER TABLE "CartItems" ADD CONSTRAINT "CartItems_cart_id_fkey" FOREIGN KEY ("ca
 ALTER TABLE "Product" ADD CONSTRAINT "Product_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "CPUSpecs" ADD CONSTRAINT "CPUSpecs_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "PowerSupplySpecs" ADD CONSTRAINT "PowerSupplySpecs_product_id_fkey" FOREIGN KEY ("product_id") REFERENCES "Product"("product_id") ON DELETE RESTRICT ON UPDATE CASCADE;
