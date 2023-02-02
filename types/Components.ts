@@ -16,8 +16,8 @@ export interface PowerSupply extends Component {
 
 export interface CaseFan extends Component {
   rpm: string
-  air_flow: string
-  noise_level: string
+  airFlow: string
+  noiseLevel: string
 }
 export interface RAM extends Component {
   size: string
@@ -25,7 +25,7 @@ export interface RAM extends Component {
   type: string
 }
 export interface Mouse extends Component {
-  track_method: string
+  trackingMethod: string
   color: string
   wireless: string
 }
@@ -38,30 +38,30 @@ export interface Keyboard extends Component {
 export interface CPUFan extends Component {
   rpm: string
   color: string
-  noise_level: string
+  noiseLevel: string
 }
 export interface Case extends Component {
-  side_panel: string
+  sidePanel: string
   color: string
-  cabinet_type: string
+  cabinetType: string
 }
 export interface Storage extends Component {
-  storage_interface: string
+  storageInterface: string
   rpm: string
   type: string
-  cache_memory: string
+  cacheMemory: string
 }
 export interface CPU extends Component {
   speed: string
   socketType: string
 }
 export interface GPU extends Component {
-  storage_interface: string
+  storageInterface: string
   memory: string
-  clock_speed: string
+  clockSpeed: string
 }
 export interface Motherboard extends Component {
-  form_factor: string
-  memory_slots: string
-  socket_type: string
+  formFactor: string
+  memorySlots: string
+  socketType: string
 }

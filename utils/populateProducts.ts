@@ -1,9 +1,11 @@
 import axios from 'axios'
 import prisma from '../prisma/lib/prisma'
 import { Category } from '../enums/category'
-import { Case, CaseFan, Component, CPU, CPUFan, GPU, Keyboard, Motherboard, Mouse, PowerSupply, RAM } from '../types/Components'
+import { Case, CaseFan, Component, CPU, CPUFan, GPU, Keyboard, Motherboard, Mouse, PowerSupply, RAM, Storage } from '../types/Components'
 import { RAPIDAPIENDPOINTS } from '../enums/rapidapiendpoints'
 import { data } from './testData'
+
+const delay = (ms: number) => new Promise((res) => setTimeout(res, ms))
 
 export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, category_id: Category) => {
   const options = {
@@ -19,15 +21,15 @@ export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, categor
   const shipped_by = ['NewEgg', 'BestBuy', 'Walmart', 'Amazon', 'Microcenter']
 
   try {
-    // const { data } = await axios.request(options)
-    // console.log(data)
+    const { data } = await axios.request(options)
+    console.log(`Adding ${componentType}`)
 
     const startDate = new Date(2020, 0, 1)
     const endDate = new Date()
 
     data.map(async (component: Component) => {
       try {
-        const product = await prisma.product.create({
+        await prisma.product.create({
           data: {
             product_id: component.id,
             name: component.model,
@@ -45,173 +47,199 @@ export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, categor
             category_id: category_id,
           },
         })
-        console.log(product)
       } catch (error) {
         console.log(error)
       }
     })
 
+    // Wait for DB to finish creating Product records
+    console.log('Waiting 15s to add Specs')
+    await delay(15000)
+    console.log('Adding Specs')
+
     switch (componentType) {
       case 'power_supply':
-        // data.map(async (component: PowerSupply, index: number) => {
-        //   try {
-        //     await prisma.powerSupplySpecs.create({
-        //       data: {
-        //         power: component.power,
-        //         color: component.color,
-        //         efficiency: component.efficiency,
-        //         product_id: component.id,
-        //       },
-        //     })
-        //   } catch (error) {}
-        // })
+        data.map(async (component: PowerSupply) => {
+          try {
+            await prisma.powerSupplySpecs.create({
+              data: {
+                power: component.power,
+                color: component.color,
+                efficiency: component.efficiency,
+                product_id: component.id,
+              },
+            })
+          } catch (error) {
+            console.log(error)
+          }
+        })
         break
-      //   case 'case_fan':
-      //     data.map(async (component: CaseFan) => {
-      //       try {
-      //         await prisma.caseFanSpecs.create({
-      //           data: {
-      //             rpm: component.rpm,
-      //             air_flow: component.air_flow,
-      //             noise_level: component.noise_level,
-      //             product_id: component.id,
-      //           },
-      //         })
-      //       } catch (error) {}
-      //     })
-      //     break
-      //   case 'ram':
-      //     data.map(async (component: RAM) => {
-      //       try {
-      //         await prisma.rAMSpecs.create({
-      //           data: {
-      //             size: component.size,
-      //             quantity: component.quantity,
-      //             type: component.type,
-      //             product_id: component.id,
-      //           },
-      //         })
-      //       } catch (error) {}
-      //     })
-      //     break
-      //   case 'mouse':
-      //     data.map(async (component: Mouse) => {
-      //       try {
-      //         await prisma.mouseSpecs.create({
-      //           data: {
-      //             track_method: component.track_method,
-      //             color: component.color,
-      //             wireless: component.wireless,
-      //             product_id: component.id,
-      //           },
-      //         })
-      //       } catch (error) {}
-      //     })
-      //     break
-      //   case 'keyboard':
-      //     data.map(async (component: Keyboard) => {
-      //       try {
-      //         await prisma.keyboardSpecs.create({
-      //           data: {
-      //             style: component.style,
-      //             backlit: component.backlit,
-      //             color: component.color,
-      //             wireless: component.wireless,
-      //             product_id: component.id,
-      //           },
-      //         })
-      //       } catch (error) {}
-      //     })
-      //     break
-      //   case 'cpu_fan':
-      //     data.map(async (component: CPUFan) => {
-      //       try {
-      //         await prisma.cPUFanSpecs.create({
-      //           data: {
-      //             rpm: component.rpm,
-      //             color: component.color,
-      //             noise_level: component.noise_level,
-      //             product_id: component.id,
-      //           },
-      //         })
-      //       } catch (error) {}
-      //     })
-      //     break
-      //   case 'case':
-      //     data.map(async (component: Case) => {
-      //       try {
-      //         await prisma.caseSpecs.create({
-      //           data: {
-      //             side_panel: component.side_panel,
-      //             color: component.color,
-      //             cabinet_type: component.cabinet_type,
-      //             product_id: component.id,
-      //           },
-      //         })
-      //       } catch (error) {}
-      //     })
-      //     break
-      //   case 'storage':
-      //     data.map(async (component: Storage) => {
-      //       try {
-      //         await prisma.storageSpecs.create({
-      //           data: {
-      //             storage_interface: component.storage_interface,
-      //             rpm: component.rpm,
-      //             type: component.type,
-      //             cache_memory: component.cache_memory,
-      //             product_id: component.id,
-      //           },
-      //         })
-      //       } catch (error) {}
-      //     })
-      //     break
-      //   case 'processor':
-      //     data.map(async (component: CPU) => {
-      //       try {
-      //         await prisma.cPUSpecs.create({
-      //           data: {
-      //             socket: component.socketType,
-      //             cores: Math.floor(Math.random() * 16) + 4,
-      //             base_clock: parseFloat(component.speed.split(' ')[0]),
-      //             boost_clock: parseFloat(component.speed.split(' ')[0]) + 0.4,
-      //             l3_cache: Math.random() > 0.5 ? 32 : 64,
-      //             tdp: Math.floor(Math.random() * 100) + 75,
-      //             integrated_graphics: Math.random() > 0.5 ? true : false,
-      //             product_id: component.id,
-      //           },
-      //         })
-      //       } catch (error) {}
-      //     })
-      //     break
-      //   case 'gpu':
-      //     data.map(async (component: GPU) => {
-      //       try {
-      //         await prisma.gPUSpecs.create({
-      //           data: {
-      //             storage_interface: component.storage_interface,
-      //             memory: component.memory,
-      //             clock_speed: component.clock_speed,
-      //             product_id: component.id,
-      //           },
-      //         })
-      //       } catch (error) {}
-      //     })
-      //     break
-      //   case 'motherboard':
-      //     data.map(async (component: Motherboard) => {
-      //       try {
-      //         await prisma.motherboardSpecs.create({
-      //           data: {
-      //             form_factor: component.form_factor,
-      //             memory_slots: component.memory_slots,
-      //             socket_type: component.socket_type,
-      //             product_id: component.id,
-      //           },
-      //         })
-      //       } catch (error) {}
-      //     })
-      //     break
+      case 'case_fan':
+        data.map(async (component: CaseFan) => {
+          try {
+            await prisma.caseFanSpecs.create({
+              data: {
+                rpm: component.rpm,
+                air_flow: component.airFlow,
+                noise_level: component.noiseLevel,
+                product_id: component.id,
+              },
+            })
+          } catch (error) {
+            console.log(error)
+          }
+        })
+        break
+      case 'ram':
+        data.map(async (component: RAM) => {
+          try {
+            await prisma.rAMSpecs.create({
+              data: {
+                size: component.size,
+                quantity: component.quantity,
+                type: component.type,
+                product_id: component.id,
+              },
+            })
+          } catch (error) {
+            console.log(error)
+          }
+        })
+        break
+      case 'mouse':
+        data.map(async (component: Mouse) => {
+          try {
+            await prisma.mouseSpecs.create({
+              data: {
+                track_method: component.trackingMethod,
+                color: component.color,
+                wireless: component.wireless,
+                product_id: component.id,
+              },
+            })
+          } catch (error) {
+            console.log(error)
+          }
+        })
+        break
+      case 'keyboard':
+        data.map(async (component: Keyboard) => {
+          try {
+            await prisma.keyboardSpecs.create({
+              data: {
+                style: component.style,
+                backlit: component.backlit,
+                color: component.color,
+                wireless: component.wireless,
+                product_id: component.id,
+              },
+            })
+          } catch (error) {
+            console.log(error)
+          }
+        })
+        break
+      case 'cpu_fan':
+        data.map(async (component: CPUFan) => {
+          try {
+            await prisma.cPUFanSpecs.create({
+              data: {
+                rpm: component.rpm,
+                color: component.color,
+                noise_level: component.noiseLevel,
+                product_id: component.id,
+              },
+            })
+          } catch (error) {
+            console.log(error)
+          }
+        })
+        break
+      case 'case':
+        data.map(async (component: Case) => {
+          try {
+            await prisma.caseSpecs.create({
+              data: {
+                side_panel: component.sidePanel,
+                color: component.color,
+                cabinet_type: component.cabinetType,
+                product_id: component.id,
+              },
+            })
+          } catch (error) {
+            console.log(error)
+          }
+        })
+        break
+      case 'storage':
+        data.map(async (component: Storage) => {
+          try {
+            await prisma.storageSpecs.create({
+              data: {
+                storage_interface: component.storageInterface,
+                rpm: component.rpm,
+                type: component.type,
+                cache_memory: component.cacheMemory,
+                product_id: component.id,
+              },
+            })
+          } catch (error) {
+            console.log(error)
+          }
+        })
+        break
+      case 'processor':
+        data.map(async (component: CPU) => {
+          try {
+            await prisma.cPUSpecs.create({
+              data: {
+                socket: component.socketType,
+                cores: Math.floor(Math.random() * 16) + 4,
+                base_clock: parseFloat(component.speed.split(' ')[0]),
+                boost_clock: parseFloat(component.speed.split(' ')[0]) + 0.4,
+                l3_cache: Math.random() > 0.5 ? 32 : 64,
+                tdp: Math.floor(Math.random() * 100) + 75,
+                integrated_graphics: Math.random() > 0.5 ? true : false,
+                product_id: component.id,
+              },
+            })
+          } catch (error) {
+            console.log(error)
+          }
+        })
+        break
+      case 'gpu':
+        data.map(async (component: GPU) => {
+          try {
+            await prisma.gPUSpecs.create({
+              data: {
+                storage_interface: component.storageInterface,
+                memory: component.memory,
+                clock_speed: component.clockSpeed,
+                product_id: component.id,
+              },
+            })
+          } catch (error) {
+            console.log(error)
+          }
+        })
+        break
+      case 'motherboard':
+        data.map(async (component: Motherboard) => {
+          try {
+            await prisma.motherboardSpecs.create({
+              data: {
+                form_factor: component.formFactor,
+                memory_slots: component.memorySlots,
+                socket_type: component.socketType,
+                product_id: component.id,
+              },
+            })
+          } catch (error) {
+            console.log(error)
+          }
+        })
+        break
     }
   } catch (error) {
     console.error(error)
@@ -219,14 +247,27 @@ export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, categor
 }
 
 //run npx ts-node populateProducts.ts
-populateProducts(RAPIDAPIENDPOINTS.POWERSUPPLY, Category.POWERSUPPLY)
-// populateProducts(RAPIDAPIENDPOINTS.CASEFAN, Category.CASEFAN)
-// populateProducts(RAPIDAPIENDPOINTS.RAM, Category.RAM)
-// populateProducts(RAPIDAPIENDPOINTS.MOUSE, Category.MOUSE)
-// populateProducts(RAPIDAPIENDPOINTS.KEYBOARD, Category.KEYBOARD)
-// populateProducts(RAPIDAPIENDPOINTS.CPUFAN, Category.CPUFAN)
-// populateProducts(RAPIDAPIENDPOINTS.CASE, Category.CASE)
-// populateProducts(RAPIDAPIENDPOINTS.STORAGE, Category.STORAGE)
-// populateProducts(RAPIDAPIENDPOINTS.PROCESSOR, Category.PROCESSOR)
-// populateProducts(RAPIDAPIENDPOINTS.GPU, Category.GPU)
-// populateProducts(RAPIDAPIENDPOINTS.MOTHERBOARD, Category.MOTHERBOARD)
+const executePopulateProducts = async () => {
+  await populateProducts(RAPIDAPIENDPOINTS.POWERSUPPLY, Category.POWERSUPPLY)
+  await populateProducts(RAPIDAPIENDPOINTS.CASEFAN, Category.CASEFAN)
+  await populateProducts(RAPIDAPIENDPOINTS.RAM, Category.RAM)
+  await populateProducts(RAPIDAPIENDPOINTS.MOUSE, Category.MOUSE)
+  await populateProducts(RAPIDAPIENDPOINTS.KEYBOARD, Category.KEYBOARD)
+
+  // API rate limit is 5 requests per minute
+  console.log('Rate limit reached. Waiting 1 minute.')
+  await delay(60000)
+
+  await populateProducts(RAPIDAPIENDPOINTS.CPUFAN, Category.CPUFAN)
+  await populateProducts(RAPIDAPIENDPOINTS.CASE, Category.CASE)
+  await populateProducts(RAPIDAPIENDPOINTS.STORAGE, Category.STORAGE)
+  await populateProducts(RAPIDAPIENDPOINTS.PROCESSOR, Category.PROCESSOR)
+  await populateProducts(RAPIDAPIENDPOINTS.GPU, Category.GPU)
+
+  console.log('Rate limit reached. Waiting 1 minute.')
+  await delay(60000)
+
+  await populateProducts(RAPIDAPIENDPOINTS.MOTHERBOARD, Category.MOTHERBOARD)
+}
+
+executePopulateProducts()
