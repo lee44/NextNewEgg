@@ -1,5 +1,7 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
+import Listings from '../components/layouts/listings/listings'
+import Nav from '../components/layouts/nav/nav'
 import prisma from '../prisma/lib/prisma'
 
 type User = {
@@ -14,22 +16,22 @@ const Home: NextPage<User> = (props) => {
         <meta name='description' content='' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-
+      <header className='bg-primary'>
+        <Nav />
+      </header>
       <main>
-        <p className='text-red-600'>{props.name}</p>
-        <p>{props.email}</p>
+        <Listings />
       </main>
-
       <footer></footer>
     </div>
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const user = await prisma.user.findFirst()
-  return {
-    props: { name: user?.name, email: user?.email },
-  }
-}
+// export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+//   const user = await prisma.user.findFirst()
+//   return {
+//     props: { name: user?.name, email: user?.email },
+//   }
+// }
 
 export default Home
