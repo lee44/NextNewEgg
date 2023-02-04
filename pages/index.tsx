@@ -2,21 +2,21 @@ import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import Listings from '../components/layouts/listings/listings'
 import Nav from '../components/layouts/nav/nav'
-import prisma from '../prisma/lib/prisma'
 
 type User = {
   name: String
   email: String
 }
+
 const Home: NextPage<User> = (props) => {
   return (
-    <div>
+    <div className='h-screen white dark:bg-primary-bg'>
       <Head>
         <title>NextNewEgg</title>
         <meta name='description' content='' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <header className='bg-primary'>
+      <header className='top-0 dark:bg-primary bg-white'>
         <Nav />
       </header>
       <main>
