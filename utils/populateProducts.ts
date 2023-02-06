@@ -1,7 +1,7 @@
 import axios from 'axios'
 import prisma from '../prisma/lib/prisma'
 import { Category } from '../enums/category'
-import { Case, CaseFan, Component, CPU, CPUFan, GPU, Keyboard, Motherboard, Mouse, PowerSupply, RAM, Storage } from '../types/Components'
+import { Case, CaseFan, Component, CPU, CPUFan, GPU, Keyboard, Motherboard, Mouse, PowerSupply, RAM, Storage } from '../types/components'
 import { RAPIDAPIENDPOINTS } from '../enums/rapidapiendpoints'
 import { data } from './testData'
 

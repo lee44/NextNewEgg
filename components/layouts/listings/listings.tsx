@@ -1,13 +1,17 @@
-import { GetServerSideProps } from 'next'
+import { Product } from '@prisma/client'
 import React from 'react'
-import prisma from '../../../prisma/lib/prisma'
-import Sublisting from './sublisting'
 
-const Listings = () => {
+type ListingsProps = {
+  products: Product[]
+}
+
+const Listings: React.FunctionComponent<ListingsProps> = ({ products }) => {
+  console.log(products)
+
   return (
     <div>
       <h2>Computer Parts</h2>
-      <Sublisting category={'CPU'} />
+      {/* <Sublisting products={products} /> */}
     </div>
   )
 }

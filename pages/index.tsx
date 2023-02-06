@@ -1,14 +1,15 @@
-import type { GetServerSideProps, NextPage } from 'next'
+import { Product, Category } from '.prisma/client'
+import type { GetServerSideProps, GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import Listings from '../components/layouts/listings/listings'
 import Nav from '../components/layouts/nav/nav'
 import prisma from '../prisma/lib/prisma'
 
-type User = {
-  name: String
-  email: String
+type HomeProps = {
+  products: Product[]
 }
-const Home: NextPage<User> = (props) => {
+
+const Home: NextPage<HomeProps> = (props) => {
   return (
     <div>
       <Head>
@@ -20,18 +21,49 @@ const Home: NextPage<User> = (props) => {
         <Nav />
       </header>
       <main>
-        <Listings />
+        <Listings products={props.products} />
       </main>
       <footer></footer>
     </div>
   )
 }
 
-// export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-//   const user = await prisma.user.findFirst()
-//   return {
-//     props: { name: user?.name, email: user?.email },
-//   }
-// }
+export const getStaticProps: GetStaticProps = async (context) => {
+  const categories = await prisma.category.findMany()
+
+  // let products = categories.map(async (category) => {
+  //   return await prisma.product.findMany({
+  //     where: {
+  //       category_id: category.id,
+  //     },
+  //     take: 5,
+  //   })
+  // })
+
+  // products = JSON.parse(JSON.stringify(products))
+
+  type Products = {
+    [category: string]: Product[]
+  }
+
+  let productsArray: Products[] = []
+  for (let category of categories) {
+    let products = await prisma.product.findMany({
+      where: {
+        category_id: category.id,
+      },
+      take: 5,
+    })
+    productsArray.push({
+      [category.name]: products,
+    })
+  }
+
+  productsArray = JSON.parse(JSON.stringify(productsArray))
+
+  return {
+    props: { products: productsArray },
+  }
+}
 
 export default Home

@@ -1,14 +1,14 @@
-import { NextPage } from 'next'
+import { Product } from '@prisma/client'
 import React from 'react'
 
 type Sublisting = {
-  category: string
+  products: Product[]
 }
 
-const Sublisting: NextPage<Sublisting> = ({ category }) => {
+const Sublisting = (products:Product[] ) => {
   return (
     <div>
-      <h3>{category}</h3>
+      <h3>{products[0].name}</h3>
     </div>
   )
 }
