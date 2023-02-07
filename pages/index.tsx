@@ -5,8 +5,12 @@ import Listings from '../components/layouts/listings/listings'
 import Nav from '../components/layouts/nav/nav'
 import prisma from '../prisma/lib/prisma'
 
+export type Products = {
+  [category: string]: Product[]
+}
+
 type HomeProps = {
-  products: Product[]
+  products: Products[]
 }
 
 const Home: NextPage<HomeProps> = (props) => {
@@ -30,21 +34,6 @@ const Home: NextPage<HomeProps> = (props) => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const categories = await prisma.category.findMany()
-
-  // let products = categories.map(async (category) => {
-  //   return await prisma.product.findMany({
-  //     where: {
-  //       category_id: category.id,
-  //     },
-  //     take: 5,
-  //   })
-  // })
-
-  // products = JSON.parse(JSON.stringify(products))
-
-  type Products = {
-    [category: string]: Product[]
-  }
 
   let productsArray: Products[] = []
   for (let category of categories) {

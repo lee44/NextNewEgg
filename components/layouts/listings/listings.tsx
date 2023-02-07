@@ -1,8 +1,10 @@
 import { Product } from '@prisma/client'
 import React from 'react'
+import { Products } from '../../../pages'
+import Card from '../../templates/card'
 
 type ListingsProps = {
-  products: Product[]
+  products: Products[]
 }
 
 const Listings: React.FunctionComponent<ListingsProps> = ({ products }) => {
@@ -10,8 +12,19 @@ const Listings: React.FunctionComponent<ListingsProps> = ({ products }) => {
 
   return (
     <div>
-      <h2>Computer Parts</h2>
-      {/* <Sublisting products={products} /> */}
+      <ul>
+        {products.map((category, index) => {
+          return (
+            <li key={index}>
+              {Object.keys(category).map((categorykey) => {
+                return category[categorykey].map((product, index) => {
+                  return <Card key={index} product={product} />
+                })
+              })}
+            </li>
+          )
+        })}
+      </ul>
     </div>
   )
 }

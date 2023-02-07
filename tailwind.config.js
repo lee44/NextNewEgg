@@ -19,6 +19,8 @@ module.exports = {
         secondary: '#e05d00',
         button: '#e05d00',
         'button-hover': '#f46500',
+        'primary-bg': '#121212',
+        'card-bg': '#212121',
       },
     },
   },
