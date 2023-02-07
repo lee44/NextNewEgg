@@ -24,7 +24,7 @@ const Home: NextPage<HomeProps> = (props) => {
       <header className='bg-primary'>
         <Nav />
       </header>
-      <main>
+      <main className='pt-10 mt-14 bg-primary-bg'>
         <Listings products={props.products} />
       </main>
       <footer></footer>

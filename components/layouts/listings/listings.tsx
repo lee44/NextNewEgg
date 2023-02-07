@@ -11,20 +11,21 @@ const Listings: React.FunctionComponent<ListingsProps> = ({ products }) => {
   console.log(products)
 
   return (
-    <div>
-      <ul>
-        {products.map((category, index) => {
+    <div className='container'>
+      {products.map((category) =>
+        Object.keys(category).map((categorykey, index) => {
           return (
-            <li key={index}>
-              {Object.keys(category).map((categorykey) => {
-                return category[categorykey].map((product, index) => {
+            <ul key={index}>
+              <h3>{categorykey}</h3>
+              <li>
+                {category[categorykey].map((product, index) => {
                   return <Card key={index} product={product} />
-                })
-              })}
-            </li>
+                })}
+              </li>
+            </ul>
           )
-        })}
-      </ul>
+        })
+      )}
     </div>
   )
 }
