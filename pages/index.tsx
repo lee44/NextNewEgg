@@ -4,10 +4,7 @@ import Head from 'next/head'
 import Listings from '../components/layouts/listings/listings'
 import Nav from '../components/layouts/nav/nav'
 import prisma from '../prisma/lib/prisma'
-
-export type Products = {
-  [category: string]: Product[]
-}
+import { Products } from '../types/products'
 
 type HomeProps = {
   products: Products[]
@@ -21,10 +18,10 @@ const Home: NextPage<HomeProps> = (props) => {
         <meta name='description' content='' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <header className='bg-primary'>
+      <header className='bg-primary z-[99]'>
         <Nav />
       </header>
-      <main className='pt-10 mt-14 bg-primary-bg'>
+      <main className='py-10 mt-14 bg-primary-bg'>
         <Listings products={props.products} />
       </main>
       <footer></footer>
