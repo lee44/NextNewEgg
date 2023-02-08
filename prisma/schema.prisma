@@ -8,35 +8,34 @@ datasource db {
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
-  email      String   @unique
-  name       String?
-  created_at DateTime @default(now())
-
-  cart     Cart? // Does not exist in the database
-  account  Account[]
-  sessions Session[]
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  created_at    DateTime  @default(now())
+  accounts      Account[]
+  sessions      Session[]
+  cart          Cart? // Does not exist in the database
 }
 
 model Account {
-  id                  String  @id @default(cuid())
-  user_id             Int     @unique
-  type                String
-  provider            String
-  provider_account_id String
-  refresh_token       String?
-  access_token        String?
-  expires_at          Int?
-  token_type          String?
-  scope               String?
-  id_token            String?
-  session_state       String?
-  oauth_token_secret  String?
-  oauth_token         String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([provider, provider_account_id])
+  @@unique([provider, providerAccountId])
 }
 
 model VerificationToken {
@@ -50,16 +49,15 @@ model VerificationToken {
 
 model Session {
   id           String   @id @default(cuid())
-  sessionToken String   @unique @map("session_token")
-  user_id      Int      @unique
+  sessionToken String   @unique
+  userId       String
   expires      DateTime
-
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Cart {
   id         Int      @id @default(autoincrement())
-  user_id    Int      @unique // foreign key that connects User and Cart
+  user_id    String   @unique // foreign key that connects User and Cart
   created_at DateTime @default(now())
 
   item CartItems[]
