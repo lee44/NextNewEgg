@@ -57,27 +57,27 @@ model Session {
 
 model Cart {
   id         Int      @id @default(autoincrement())
-  user_id    String   @unique // foreign key that connects User and Cart
+  userId     String   @unique // foreign key that connects User and Cart
   created_at DateTime @default(now())
 
   item CartItems[]
-  user User        @relation(fields: [user_id], references: [id]) // Relation fields define connections between models at the Prisma level and do not exist in the database
+  user User        @relation(fields: [userId], references: [id]) // Relation fields define connections between models at the Prisma level and do not exist in the database
 }
 
 model CartItems {
   id         Int      @id @default(autoincrement())
   quantity   Int
   created_at DateTime @default(now())
-  product_id String   @unique
-  cart_id    Int
+  productId  String   @unique
+  cartId     Int
 
-  product Product @relation(fields: [product_id], references: [product_id])
-  cart    Cart    @relation(fields: [cart_id], references: [id])
+  product Product @relation(fields: [productId], references: [productId])
+  cart    Cart    @relation(fields: [cartId], references: [id])
 }
 
 model Product {
   id            Int      @id @default(autoincrement())
-  product_id    String   @unique
+  productId     String   @unique
   name          String
   full_name     String
   manufacturer  String
@@ -91,7 +91,7 @@ model Product {
   img           String?
   release_date  DateTime
   created_at    DateTime @default(now())
-  category_id   Int
+  categoryId    Int
 
   CPUSpecs         CPUSpecs?
   PowerSupplySpecs PowerSupplySpecs?
@@ -105,7 +105,7 @@ model Product {
   GPUSpecs         GPUSpecs?
   MotherboardSpecs MotherboardSpecs?
   CartItems        CartItems?
-  category         Category          @relation(fields: [category_id], references: [id])
+  category         Category          @relation(fields: [categoryId], references: [id])
 }
 
 model Category {
@@ -120,9 +120,9 @@ model PowerSupplySpecs {
   power      String?
   color      String?
   efficiency String?
-  product_id String  @unique
+  productId  String  @unique
 
-  product Product @relation(fields: [product_id], references: [product_id])
+  product Product @relation(fields: [productId], references: [productId])
 }
 
 model CaseFanSpecs {
@@ -130,19 +130,19 @@ model CaseFanSpecs {
   rpm         String
   air_flow    String
   noise_level String
-  product_id  String @unique
+  productId   String @unique
 
-  product Product @relation(fields: [product_id], references: [product_id])
+  product Product @relation(fields: [productId], references: [productId])
 }
 
 model RAMSpecs {
-  id         Int    @id @default(autoincrement())
-  size       String
-  quantity   String
-  type       String
-  product_id String @unique
+  id        Int    @id @default(autoincrement())
+  size      String
+  quantity  String
+  type      String
+  productId String @unique
 
-  product Product @relation(fields: [product_id], references: [product_id])
+  product Product @relation(fields: [productId], references: [productId])
 }
 
 model MouseSpecs {
@@ -150,20 +150,20 @@ model MouseSpecs {
   track_method String
   color        String
   wireless     String
-  product_id   String @unique
+  productId    String @unique
 
-  product Product @relation(fields: [product_id], references: [product_id])
+  product Product @relation(fields: [productId], references: [productId])
 }
 
 model KeyboardSpecs {
-  id         Int    @id @default(autoincrement())
-  style      String
-  backlit    String
-  color      String
-  wireless   String
-  product_id String @unique
+  id        Int    @id @default(autoincrement())
+  style     String
+  backlit   String
+  color     String
+  wireless  String
+  productId String @unique
 
-  product Product @relation(fields: [product_id], references: [product_id])
+  product Product @relation(fields: [productId], references: [productId])
 }
 
 model CPUFanSpecs {
@@ -171,9 +171,9 @@ model CPUFanSpecs {
   rpm         String
   color       String
   noise_level String
-  product_id  String @unique
+  productId   String @unique
 
-  product Product @relation(fields: [product_id], references: [product_id])
+  product Product @relation(fields: [productId], references: [productId])
 }
 
 model CaseSpecs {
@@ -181,9 +181,9 @@ model CaseSpecs {
   side_panel   String
   color        String
   cabinet_type String
-  product_id   String @unique
+  productId    String @unique
 
-  product Product @relation(fields: [product_id], references: [product_id])
+  product Product @relation(fields: [productId], references: [productId])
 }
 
 model StorageSpecs {
@@ -192,9 +192,9 @@ model StorageSpecs {
   rpm               String
   type              String
   cache_memory      String
-  product_id        String @unique
+  productId         String @unique
 
-  product Product @relation(fields: [product_id], references: [product_id])
+  product Product @relation(fields: [productId], references: [productId])
 }
 
 model CPUSpecs {
@@ -206,9 +206,9 @@ model CPUSpecs {
   l3_cache            Int
   tdp                 Int
   integrated_graphics Boolean
-  product_id          String  @unique
+  productId           String  @unique
 
-  product Product @relation(fields: [product_id], references: [product_id])
+  product Product @relation(fields: [productId], references: [productId])
 }
 
 model GPUSpecs {
@@ -216,9 +216,9 @@ model GPUSpecs {
   storage_interface String
   memory            String
   clock_speed       String
-  product_id        String @unique
+  productId         String @unique
 
-  product Product @relation(fields: [product_id], references: [product_id])
+  product Product @relation(fields: [productId], references: [productId])
 }
 
 model MotherboardSpecs {
@@ -226,7 +226,7 @@ model MotherboardSpecs {
   form_factor  String
   memory_slots String
   socket_type  String
-  product_id   String @unique
+  productId    String @unique
 
-  product Product @relation(fields: [product_id], references: [product_id])
+  product Product @relation(fields: [productId], references: [productId])
 }

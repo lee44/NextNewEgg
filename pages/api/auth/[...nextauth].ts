@@ -13,13 +13,19 @@ export const authOptions = {
   ],
   pages: {
     signIn: '/auth/signin',
-    signOut: '/auth/signout',
   },
   adapter: PrismaAdapter(prisma),
   secret: process.env.NEXTAUTH_SECRET,
+  debug: true,
 }
 
-const authHandler: NextApiHandler = (req, res) => {
-  return NextAuth(req, res, authOptions)
+const authHandler: NextApiHandler = async (req, res) => {
+  if (req?.query?.nextauth?.includes('callback') && req.method === 'GET') {
+    console.log('GET Request', req.body)
+  } else if (req?.query?.nextauth?.includes('callback') && req.method === 'POST') {
+    console.log('POST Request', req.body)
+  }
+
+  return await NextAuth(req, res, authOptions)
 }
 export default authHandler

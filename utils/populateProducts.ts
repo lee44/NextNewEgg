@@ -7,7 +7,7 @@ import { data } from './testData'
 
 const delay = (ms: number) => new Promise((res) => setTimeout(res, ms))
 
-export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, category_id: Category) => {
+export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, categoryId: Category) => {
   const options = {
     method: 'GET',
     url: `https://computer-components-api.p.rapidapi.com/${componentType}`,
@@ -31,7 +31,7 @@ export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, categor
       try {
         await prisma.product.create({
           data: {
-            product_id: component.id,
+            productId: component.id,
             name: component.model,
             full_name: component.title,
             manufacturer: component.brand,
@@ -44,7 +44,7 @@ export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, categor
             stars: Math.floor(Math.random() * 5),
             img: component.img,
             release_date: new Date(startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime())),
-            category_id: category_id,
+            categoryId: categoryId,
           },
         })
       } catch (error) {
@@ -66,7 +66,7 @@ export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, categor
                 power: component.power,
                 color: component.color,
                 efficiency: component.efficiency,
-                product_id: component.id,
+                productId: component.id,
               },
             })
           } catch (error) {
@@ -82,7 +82,7 @@ export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, categor
                 rpm: component.rpm,
                 air_flow: component.airFlow,
                 noise_level: component.noiseLevel,
-                product_id: component.id,
+                productId: component.id,
               },
             })
           } catch (error) {
@@ -98,7 +98,7 @@ export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, categor
                 size: component.size,
                 quantity: component.quantity,
                 type: component.type,
-                product_id: component.id,
+                productId: component.id,
               },
             })
           } catch (error) {
@@ -114,7 +114,7 @@ export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, categor
                 track_method: component.trackingMethod,
                 color: component.color,
                 wireless: component.wireless,
-                product_id: component.id,
+                productId: component.id,
               },
             })
           } catch (error) {
@@ -131,7 +131,7 @@ export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, categor
                 backlit: component.backlit,
                 color: component.color,
                 wireless: component.wireless,
-                product_id: component.id,
+                productId: component.id,
               },
             })
           } catch (error) {
@@ -147,7 +147,7 @@ export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, categor
                 rpm: component.rpm,
                 color: component.color,
                 noise_level: component.noiseLevel,
-                product_id: component.id,
+                productId: component.id,
               },
             })
           } catch (error) {
@@ -163,7 +163,7 @@ export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, categor
                 side_panel: component.sidePanel,
                 color: component.color,
                 cabinet_type: component.cabinetType,
-                product_id: component.id,
+                productId: component.id,
               },
             })
           } catch (error) {
@@ -180,7 +180,7 @@ export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, categor
                 rpm: component.rpm,
                 type: component.type,
                 cache_memory: component.cacheMemory,
-                product_id: component.id,
+                productId: component.id,
               },
             })
           } catch (error) {
@@ -200,7 +200,7 @@ export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, categor
                 l3_cache: Math.random() > 0.5 ? 32 : 64,
                 tdp: Math.floor(Math.random() * 100) + 75,
                 integrated_graphics: Math.random() > 0.5 ? true : false,
-                product_id: component.id,
+                productId: component.id,
               },
             })
           } catch (error) {
@@ -216,7 +216,7 @@ export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, categor
                 storage_interface: component.storageInterface,
                 memory: component.memory,
                 clock_speed: component.clockSpeed,
-                product_id: component.id,
+                productId: component.id,
               },
             })
           } catch (error) {
@@ -232,7 +232,7 @@ export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, categor
                 form_factor: component.formFactor,
                 memory_slots: component.memorySlots,
                 socket_type: component.socketType,
-                product_id: component.id,
+                productId: component.id,
               },
             })
           } catch (error) {

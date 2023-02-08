@@ -10,7 +10,10 @@ export default function SignIn({ providers }: InferGetServerSidePropsType<typeof
       <div className='h-screen flex justify-center items-center'>
         {Object.values(providers).map((provider) => (
           <div key={provider.name}>
-            <button className='text-black border-2 p-2 rounded-md' onClick={() => signIn(provider.id)}>
+            <button
+              className='text-black border-2 p-2 rounded-md'
+              onClick={() => signIn(provider.id, { callbackUrl: 'http://localhost:3000/profile' })}
+            >
               Sign in with {provider.name}
             </button>
           </div>

@@ -1,5 +1,4 @@
-import { Product, Category } from '.prisma/client'
-import type { GetServerSideProps, GetStaticProps, NextPage } from 'next'
+import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import Listings from '../components/layouts/listings/listings'
 import Nav from '../components/layouts/nav/nav'
@@ -36,7 +35,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   for (let category of categories) {
     let products = await prisma.product.findMany({
       where: {
-        category_id: category.id,
+        categoryId: category.id,
       },
       take: 5,
     })
