@@ -3,6 +3,7 @@ import type { GetServerSideProps, GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import Listings from '../components/layouts/listings/listings'
 import Nav from '../components/layouts/nav/nav'
+import prisma from '../prisma/lib/prisma'
 
 export type Products = {
   [category: string]: Product[]
