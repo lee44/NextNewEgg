@@ -20,6 +20,6 @@ export const authOptions = {
 }
 
 const authHandler: NextApiHandler = (req, res) => {
-  NextAuth(req, res, authOptions)
+  return NextAuth(req, res, authOptions)
 }
 export default authHandler
