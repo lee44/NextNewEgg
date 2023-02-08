@@ -12,16 +12,16 @@ type HomeProps = {
 
 const Home: NextPage<HomeProps> = (props) => {
   return (
-    <div className='h-screen white dark:bg-primary-bg'>
+    <div className='h-screen'>
       <Head>
         <title>NextNewEgg</title>
         <meta name='description' content='' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <header className='bg-primary z-[99]'>
+      <header className='dark:bg-primary z-[99]'>
         <Nav />
       </header>
-      <main className='py-10 mt-14 bg-primary-bg'>
+      <main className='py-10 mt-20 dark:bg-primary-bg'>
         <Listings products={props.products} />
       </main>
       <footer></footer>

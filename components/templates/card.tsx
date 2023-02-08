@@ -21,9 +21,9 @@ const Card: React.FunctionComponent<Card> = ({ product }) => {
           <p className='text-left italic'>{product.free_shipping ? 'FREE SHIPPING' : ''}</p>
         </li>
       </ul>
-      <div className='relative h-full min-h-[125px]'>
+      {/* <div className='relative h-full min-h-[125px]'>
         <Image src={product.img || ''} alt='product' className='object-contain' fill sizes='min-width: 100%;' />
-      </div>
+      </div> */}
     </div>
   )
 }
