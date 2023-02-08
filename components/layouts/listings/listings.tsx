@@ -13,7 +13,7 @@ const Listings: React.FunctionComponent<ListingsProps> = ({ products }) => {
       {products.map((category) =>
         Object.keys(category).map((categoryKey, index) => (
           <div key={index}>
-            <h3>{categoryKey}</h3>
+            <h3 className='dark:text-white'>{categoryKey}</h3>
             <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3	gap-4 auto-rows-fr'>
               {category[categoryKey].map((product, index) => {
                 return (

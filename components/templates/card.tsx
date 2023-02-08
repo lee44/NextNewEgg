@@ -10,15 +10,15 @@ const Card: React.FunctionComponent<Card> = ({ product }) => {
   return (
     <div className='grid grid-cols-2  bg-card-bg rounded-md md:p-5 p-4 h-full'>
       <ul className='flex flex-col justify-center '>
-        <li>{product.stars}</li>
+        <li className='dark:text-white'>{product.stars}</li>
         <li>
-          <h5 className='text-left'>{product.name}</h5>
+          <h5 className='text-left dark:text-white'>{product.name}</h5>
         </li>
         <li>
-          <h3 className='text-left'>${product.price}</h3>
+          <h3 className='text-left dark:text-white'>${product.price}</h3>
         </li>
         <li>
-          <p className='text-left italic'>{product.free_shipping ? 'FREE SHIPPING' : ''}</p>
+          <p className='text-left italic dark:text-white'>{product.free_shipping ? 'FREE SHIPPING' : ''}</p>
         </li>
       </ul>
       {/* <div className='relative h-full min-h-[125px]'>
