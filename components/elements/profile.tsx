@@ -9,13 +9,13 @@ const Profile = () => {
     return (
       <>
         Signed in as {session?.user?.name}
-        <Button text={'Sign Out'} url={'/signout'} />
+        <Button text={'Sign Out'} url={'/auth/signout'} />
       </>
     )
   }
   return (
     <>
-      <Button text={'Log In'} url={'/signin'} />
+      <Button text={'Log In'} url={'/auth/signin'} />
     </>
   )
 }
