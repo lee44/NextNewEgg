@@ -22,7 +22,7 @@ const Card: React.FunctionComponent<Card> = ({ product }) => {
         </li>
       </ul>
       <div className='relative h-full min-h-[125px]'>
-        <Image src={product.img || ''} alt='product' className='object-contain' fill />
+        <Image src={product.img || ''} alt='product' className='object-contain' fill sizes='min-width: 100%;' />
       </div>
     </div>
   )
