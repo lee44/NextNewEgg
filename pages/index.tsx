@@ -1,4 +1,5 @@
 import type { GetStaticProps, NextPage } from 'next'
+import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Listings from '../components/layouts/listings/listings'
 import Nav from '../components/layouts/nav/nav'
