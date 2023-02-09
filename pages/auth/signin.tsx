@@ -2,20 +2,16 @@ import type { GetServerSidePropsContext, InferGetServerSidePropsType } from 'nex
 import { getProviders, signIn } from 'next-auth/react'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../api/auth/[...nextauth]'
+import OauthButton from '../../components/templates/oauthbutton'
 
 export default function SignIn({ providers }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   console.log(providers)
   return (
     <>
-      <div className='h-screen flex justify-center items-center'>
+      <div className='h-screen flex flex-col justify-center items-center gap-y-4'>
         {Object.values(providers).map((provider) => (
-          <div key={provider.name}>
-            <button
-              className='text-black border-2 p-2 rounded-md'
-              onClick={() => signIn(provider.id, { callbackUrl: 'http://localhost:3000/profile' })}
-            >
-              Sign in with {provider.name}
-            </button>
+          <div className='' key={provider.name}>
+            <OauthButton provider={provider} />
           </div>
         ))}
       </div>
