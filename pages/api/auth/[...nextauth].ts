@@ -25,11 +25,12 @@ export const authOptions: AuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-      allowDangerousEmailAccountLinking: true,
+      // allowDangerousEmailAccountLinking: true,
     }),
   ],
   pages: {
     signIn: '/auth/signin',
+    error: '/auth/error',
   },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
@@ -78,10 +79,12 @@ export const authOptions: AuthOptions = {
 
 const authHandler: NextApiHandler = async (req, res) => {
   if (req?.query?.nextauth?.includes('callback') && req.method === 'GET') {
-    console.log('GET Request', req.body)
+    console.log('GET Request', req?.query)
   } else if (req?.query?.nextauth?.includes('callback') && req.method === 'POST') {
     console.log('POST Request', req.body)
   }
+
+  console.log('authHandler called')
 
   return await NextAuth(req, res, authOptions)
 }
