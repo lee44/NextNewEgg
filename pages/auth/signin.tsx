@@ -5,7 +5,6 @@ import { authOptions } from '../api/auth/[...nextauth]'
 import OauthButton from '../../components/templates/oauthbutton'
 
 export default function SignIn({ providers }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  console.log(providers)
   return (
     <>
       <div className='h-screen flex flex-col justify-center items-center gap-y-4'>
