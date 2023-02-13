@@ -34,13 +34,41 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       console.log('Callback Signing in')
-
       return true
+    },
+    async redirect({ url, baseUrl }) {
+      console.log('Callback redirect')
+      return baseUrl
+    },
+    async session({ session, token, user }) {
+      console.log('Callback session')
+      return session
     },
   },
   events: {
     async signIn(message) {
-      console.log('Successfully signed in')
+      /* on successful sign in */
+      console.log('Successfully signed in', message.user, message?.account?.provider)
+    },
+    async signOut(message) {
+      /* on signout */
+      console.log('Successfully signed out', message)
+    },
+    async createUser(message) {
+      /* user created */
+      console.log('User created', message)
+    },
+    async updateUser(message) {
+      /* user updated - e.g. their email was verified */
+      console.log('User updated', message)
+    },
+    async linkAccount(message) {
+      /* account (e.g. Twitter) linked to a user */
+      console.log('Account linked', message)
+    },
+    async session(message) {
+      /* session is active */
+      console.log('Session is active', message)
     },
   },
   adapter: PrismaAdapter(prisma),
