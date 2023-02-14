@@ -68,15 +68,16 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
             const user = await prisma.user.findFirst({ where: { email: credentials?.email } })
             console.log('Authorize User Credentials: ', user)
             if (user !== null) {
-              const res = await bcrypt.compare(credentials?.password as string, user?.password as string)
-              if (res === true) {
+              //const res = await bcrypt.compare(credentials?.password as string, user?.password as string)
+              // if (res === true) {
+              if (credentials?.password === user?.password) {
                 let userAccount = {
-                  id: user.id.toString(),
+                  id: user.id,
                   name: user.name,
                   email: user.email,
                 }
-                console.log('UserAccount created: ', userAccount)
-                return userAccount as any
+                console.log('User has been authorized ', userAccount)
+                return userAccount
               } else {
                 console.log('Wrong password')
                 return null
@@ -87,6 +88,7 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
           } catch (err) {
             console.log('authorize error :', err)
           }
+          return null
         },
       }),
     ],
