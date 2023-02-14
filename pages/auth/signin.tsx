@@ -36,7 +36,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const providers = await getProviders()
 
+  console.log(providers)
+
   return {
-    props: { providers: Object.values(providers) ?? [], error: context?.query?.error || null },
+    props: { providers: Object.values(providers ?? {}), error: context?.query?.error || null },
   }
 }
