@@ -25,13 +25,14 @@ export const authOptions: AuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-      // allowDangerousEmailAccountLinking: true,
+      allowDangerousEmailAccountLinking: true,
     }),
   ],
   pages: {
     signIn: '/auth/signin',
     error: '/auth/error',
   },
+  // Callbacks are asynchronous functions you can use to control what happens when an action is performed
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       console.log('Callback Signing in')
@@ -46,6 +47,7 @@ export const authOptions: AuthOptions = {
       return session
     },
   },
+  // Events are asynchronous functions that do not return a response, they are useful for audit logs / reporting
   events: {
     async signIn(message) {
       /* on successful sign in */
