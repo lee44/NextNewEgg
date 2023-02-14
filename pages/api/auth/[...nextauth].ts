@@ -5,6 +5,26 @@ import GithubProvider from 'next-auth/providers/github'
 import prisma from '../../../prisma/lib/prisma'
 import GoogleProvider from 'next-auth/providers/google'
 
+// const getAdapter = () => ({
+//   ...PrismaAdapter(prisma),
+//   async getSessionAndUser(sessionToken: string) {
+//     const session = await prisma.session.findUnique({
+//       where: {
+//         sessionToken: sessionToken,
+//       },
+//     })
+//     const user = await prisma.user.findUnique({
+//       where: {
+//         id: session?.userId,
+//       },
+//     })
+//     console.log('SESSION USER :', session, user)
+//     if (!user || !session) return null
+
+//     return { user: user, session: session }
+//   },
+// })
+
 export const authOptions: AuthOptions = {
   session: {
     strategy: 'database',
@@ -32,6 +52,9 @@ export const authOptions: AuthOptions = {
     signIn: '/auth/signin',
     error: '/auth/error',
   },
+  adapter: PrismaAdapter(prisma),
+  secret: process.env.NEXTAUTH_SECRET,
+  // debug: true,
   // Callbacks are asynchronous functions you can use to control what happens when an action is performed
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
@@ -74,9 +97,6 @@ export const authOptions: AuthOptions = {
       console.log('Session is active', message)
     },
   },
-  adapter: PrismaAdapter(prisma),
-  secret: process.env.NEXTAUTH_SECRET,
-  // debug: true,
 }
 
 const authHandler: NextApiHandler = async (req, res) => {
