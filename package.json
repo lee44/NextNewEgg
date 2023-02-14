@@ -16,12 +16,14 @@
     "bcrypt-ts": "^3.0.0",
     "cookies": "^0.8.0",
     "cookies-next": "^2.1.1",
+    "formik": "^2.2.9",
     "next": "13.1.6",
     "next-auth": "^4.19.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-toggle-dark-mode": "^1.1.1",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "yup": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "18.11.18",

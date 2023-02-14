@@ -5,7 +5,7 @@ import GithubProvider from 'next-auth/providers/github'
 import prisma from '../../../prisma/lib/prisma'
 import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import { compare } from 'bcrypt-ts'
+import bcrypt from 'bcrypt-ts'
 import { randomUUID } from 'crypto'
 import { getCookie, setCookie } from 'cookies-next'
 import { encode, decode } from 'next-auth/jwt'
@@ -68,7 +68,7 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
             const user = await prisma.user.findFirst({ where: { email: credentials?.email } })
             console.log('Authorize User Credentials: ', user)
             if (user !== null) {
-              const res = await compare(credentials?.password as string, user?.password as string)
+              const res = await bcrypt.compare(credentials?.password as string, user?.password as string)
               if (res === true) {
                 let userAccount = {
                   id: user.id.toString(),
@@ -105,12 +105,14 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
       },
       async session({ session, user }) {
         console.log('SESSION callback', session, user)
-        if (session.user) {
-          session.user.id = user.id
-        }
+        // if (session.user) {
+        //   session.user.id = user.id
+        // }
         return session
       },
       async signIn({ user }) {
+        console.log('SignIn Callback')
+
         if (req.query.nextauth?.includes('callback') && req.query.nextauth?.includes('credentials') && req.method === 'POST') {
           if (user && 'id' in user) {
             const sessionToken = randomUUID()
@@ -182,68 +184,68 @@ const authHandler: NextApiHandler = async (req, res) => {
     console.log('GET Request', req?.query)
   } else if (req?.query?.nextauth?.includes('callback') && req.method === 'POST') {
     console.log('POST Request', req.body)
-  }
 
-  const { name, email, password, confirm, csrfToken } = req.body
+    // const { name, email, password, confirm, csrfToken } = req.body
 
-  if (!(name && email && password && confirm && password.length >= 1)) {
-    res.status(400).json({
-      statusText: 'Invalid user parameters',
-    })
-  }
+    // if (!(name && email && password && confirm && password.length >= 1)) {
+    //   res.status(400).json({
+    //     statusText: 'Invalid user parameters',
+    //   })
+    // }
 
-  if (password != confirm) {
-    res.status(400).json({
-      statusText: 'Password mismatch',
-    })
-  }
+    // if (password != confirm) {
+    //   res.status(400).json({
+    //     statusText: 'Password mismatch',
+    //   })
+    // }
 
-  const profileExists = await prisma.user.findMany({
-    where: {
-      name: name,
-      email: email,
-    },
-  })
+    // const profileExists = await prisma.user.findMany({
+    //   where: {
+    //     name: name,
+    //     email: email,
+    //   },
+    // })
 
-  if (profileExists && Array.isArray(profileExists) && profileExists.length > 0) {
-    res.status(403).json({
-      statusText: 'User already exists',
-    })
-  }
+    // if (profileExists && Array.isArray(profileExists) && profileExists.length > 0) {
+    //   res.status(403).json({
+    //     statusText: 'User already exists',
+    //   })
+    // }
 
-  const user = await prisma.user.create({
-    data: {
-      name: name,
-      email: email,
-      password: password,
-    },
-  })
+    // const user = await prisma.user.create({
+    //   data: {
+    //     name: name,
+    //     email: email,
+    //     password: bcrypt.hashSync(password),
+    //   },
+    // })
 
-  if (!user) {
-    res.status(500).json({
-      statusText: 'Unable to create user account',
-    })
-  }
+    // if (!user) {
+    //   res.status(500).json({
+    //     statusText: 'Unable to create user account',
+    //   })
+    // }
 
-  const account = await prisma.account.create({
-    data: {
-      userId: user.id,
-      type: 'credentials',
-      provider: 'credentials',
-      providerAccountId: user.id,
-    },
-  })
+    // const account = await prisma.account.create({
+    //   data: {
+    //     userId: user.id,
+    //     type: 'credentials',
+    //     provider: 'credentials',
+    //     providerAccountId: user.id,
+    //   },
+    // })
 
-  if (user && account) {
-    res.status(200).json({
-      id: user.id,
-      name: user.name,
-      email: user.email,
-    })
-  } else {
-    res.status(500).json({
-      statusText: 'Unable to link account to created user profile',
-    })
+    // if (user && account) {
+    //   res.status(200).json({
+    //     id: user.id,
+    //     name: user.name,
+    //     email: user.email,
+    //   })
+    // } else {
+    //   res.status(500).json({
+    //     statusText: 'Unable to link account to created user profile',
+    //   })
+    // }
   }
 
   return await NextAuth(req, res, authOptions(req, res))

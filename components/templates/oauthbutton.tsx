@@ -15,7 +15,7 @@ const OauthButton: React.FunctionComponent<OauthButton> = ({ provider }) => {
   }
   return (
     <button
-      className='flex justify-end gap-x-8 text-white border-2 p-4 rounded-md hover:bg-button-hover hover:border-transparent'
+      className='flex justify-end gap-x-8 text-white border-2 py-4 px-8 rounded-md hover:bg-button-hover hover:border-transparent'
       onClick={() => signIn(provider.id, { callbackUrl: 'http://localhost:3000/profile' })}
     >
       <Image src={imgSrc} alt='icon' className='pt-0.5' width={20} height={20} />
