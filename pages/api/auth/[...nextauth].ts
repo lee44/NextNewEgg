@@ -7,7 +7,8 @@ import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import bcrypt from 'bcrypt-ts'
 import { randomUUID } from 'crypto'
-import { getCookie, setCookie } from 'cookies-next'
+import Cookies from 'cookies'
+
 import { encode, decode } from 'next-auth/jwt'
 
 const getAdapter = () => ({
@@ -63,10 +64,11 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
           password: { label: 'password', type: 'password' },
         },
 
-        async authorize(credentials, req) {
+        async authorize(credentials) {
+          console.log(req.body)
+
           try {
             const user = await prisma.user.findFirst({ where: { email: credentials?.email } })
-            console.log('Authorize User Credentials: ', user)
             if (user !== null) {
               //const res = await bcrypt.compare(credentials?.password as string, user?.password as string)
               // if (res === true) {
@@ -76,7 +78,7 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
                   name: user.name,
                   email: user.email,
                 }
-                console.log('User has been authorized ', userAccount)
+                console.log(`User ${user.name} has been authorized`)
                 return userAccount
               } else {
                 console.log('Wrong password')
@@ -102,14 +104,11 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
     // Callbacks are asynchronous functions you can use to control what happens when an action is performed
     callbacks: {
       async redirect({ url, baseUrl }) {
-        console.log('Callback redirect')
-        return baseUrl
+        console.log('Callback redirect', url, baseUrl)
+        return url
       },
       async session({ session, user }) {
-        console.log('SESSION callback', session, user)
-        // if (session.user) {
-        //   session.user.id = user.id
-        // }
+        console.log('Session callback')
         return session
       },
       async signIn({ user }) {
@@ -125,7 +124,10 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
               expires: sessionExpiry,
             })
 
-            setCookie('next-auth.session-token', sessionToken, {
+            const cookies = new Cookies(req, res)
+            console.log('SessionToken', sessionToken)
+
+            cookies.set('next-auth.session-token', sessionToken, {
               expires: sessionExpiry,
             })
           }
@@ -135,9 +137,15 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
     },
     jwt: {
       encode: async (params) => {
+        console.log('JWT Encode Called')
+
         if (req.query.nextauth?.includes('callback') && req.query.nextauth?.includes('credentials') && req.method === 'POST') {
-          const cookie = getCookie('next-auth.session-token')
-          if (cookie) return cookie as string
+          const cookies = new Cookies(req, res)
+
+          const cookie = cookies.get('next-auth.session-token')
+          console.log('Cookie', cookies.request.headers.cookie)
+
+          if (cookie) return cookie
           else return ''
         }
         // Revert to default behaviour when not in the credentials provider callback flow
@@ -155,27 +163,27 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
     events: {
       async signIn(message) {
         /* on successful sign in */
-        console.log('Successfully signed in', message.user, message?.account?.provider)
+        console.log('Successfully signed in', message.user.name, 'using', message?.account?.provider)
       },
       async signOut(message) {
         /* on signout */
-        console.log('Successfully signed out', message)
+        console.log('Successfully signed out')
       },
       async createUser(message) {
         /* user created */
-        console.log('User created', message)
+        console.log('User created')
       },
       async updateUser(message) {
         /* user updated - e.g. their email was verified */
-        console.log('User updated', message)
+        console.log('User updated')
       },
       async linkAccount(message) {
         /* account (e.g. Twitter) linked to a user */
-        console.log('Account linked', message)
+        console.log('Account linked')
       },
       async session(message) {
         /* session is active */
-        console.log('Session is active', message)
+        console.log('Session is active')
       },
     },
   }
@@ -183,9 +191,9 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
 
 const authHandler: NextApiHandler = async (req, res) => {
   if (req?.query?.nextauth?.includes('callback') && req.method === 'GET') {
-    console.log('GET Request', req?.query)
+    console.log('GET Request')
   } else if (req?.query?.nextauth?.includes('callback') && req.method === 'POST') {
-    console.log('POST Request', req.body)
+    console.log('POST Request')
 
     // const { name, email, password, confirm, csrfToken } = req.body
 

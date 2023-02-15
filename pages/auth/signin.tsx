@@ -38,6 +38,7 @@ const SignIn = ({ providers, error, csrfToken }: SignInProps) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  // @ts-ignore
   const session = await getServerSession(context.req, context.res, authOptions)
 
   if (session) {

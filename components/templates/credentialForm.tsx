@@ -2,11 +2,8 @@ import { useState } from 'react'
 import { signIn, getCsrfToken } from 'next-auth/react'
 import { Formik, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-import { useRouter } from 'next/router'
-import { GetServerSideProps } from 'next'
 
 const CredentialForm = ({ csrfToken }: { csrfToken: string | undefined }) => {
-  const router = useRouter()
   const [error, setError] = useState<string | null>('')
 
   return (
@@ -19,17 +16,15 @@ const CredentialForm = ({ csrfToken }: { csrfToken: string | undefined }) => {
         })}
         onSubmit={async (values, { setSubmitting }) => {
           const res = await signIn('credentials', {
-            redirect: true,
             email: values.email,
             password: values.password,
-            callbackUrl: '/profile',
+            callbackUrl: 'http://localhost:3000/profile',
           })
           if (res?.error) {
             setError(res?.error)
           } else {
             setError(null)
           }
-          if (res?.url) router.push(res?.url)
           setSubmitting(false)
         }}
       >
