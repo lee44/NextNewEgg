@@ -65,8 +65,6 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
         },
 
         async authorize(credentials) {
-          console.log(req.body)
-
           try {
             const user = await prisma.user.findFirst({ where: { email: credentials?.email } })
             if (user !== null) {
@@ -137,13 +135,11 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
     },
     jwt: {
       encode: async (params) => {
-        console.log('JWT Encode Called')
-
         if (req.query.nextauth?.includes('callback') && req.query.nextauth?.includes('credentials') && req.method === 'POST') {
           const cookies = new Cookies(req, res)
 
           const cookie = cookies.get('next-auth.session-token')
-          console.log('Cookie', cookies.request.headers.cookie)
+          // console.log('Cookie', cookies.request.headers.cookie)
 
           if (cookie) return cookie
           else return ''

@@ -6,6 +6,7 @@ import ErrorMessage from '../../components/elements/errorMessage'
 import Image from 'next/image'
 import CredentialForm from '../../components/templates/credentialForm'
 import OauthButton from '../../components/templates/oauthbutton'
+import { errorMessage } from '../../types/errors'
 
 type SignInProps = {
   providers: ClientSafeProvider
@@ -19,7 +20,7 @@ const SignIn = ({ providers, error, csrfToken }: SignInProps) => {
   return (
     <>
       <div className='h-screen flex items-center justify-center bg-primary-bg'>
-        <div className='flex flex-col justify-center items-center gap-y-4 border-1 p-12 rounded-md bg-card-bg'>
+        <div className='max-w-[400px] flex flex-col justify-center items-center gap-y-4 border-1 p-12 rounded-md bg-card-bg'>
           <Image src={'/icons/newegg.png'} alt='product' className='' width={135} height={115} priority />
           <h5 className='text-white'>Sign In</h5>
           {error && <ErrorMessage message={error} />}
@@ -54,7 +55,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       providers: Object.values(providers ?? {}),
-      error: context?.query?.error || null,
+      error: errorMessage(context?.query?.error) || null,
       csrfToken: (await getCsrfToken(context)) || null,
     },
   }
