@@ -5,7 +5,7 @@ import { authOptions } from '../api/auth/[...nextauth]'
 import ErrorMessage from '../../components/elements/errorMessage'
 import Image from 'next/image'
 import CredentialForm from '../../components/templates/credentialForm'
-import OauthButton from '../../components/templates/oauthButton'
+import OauthButton from '../../components/templates/oauthbutton'
 
 type SignInProps = {
   providers: ClientSafeProvider
@@ -27,7 +27,7 @@ const SignIn = ({ providers, error, csrfToken }: SignInProps) => {
           {Object.values(providers)
             .filter((provider) => provider.name !== 'Credentials')
             .map((provider) => (
-              <div className='' key={provider.name}>
+              <div className='w-full' key={provider.name}>
                 <OauthButton provider={provider} />
               </div>
             ))}

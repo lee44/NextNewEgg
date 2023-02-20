@@ -64,7 +64,7 @@ const CredentialForm = ({ csrfToken }: { csrfToken: string | undefined }) => {
                 </div>
               </div>
               <div className='w-full flex items-center justify-center'>
-                <button type='submit' className='bg-button hover:bg-button-hover p-3 rounded-lg w-full'>
+                <button type='submit' className='bg-button hover:bg-button-hover p-3 rounded-md w-full font-bold text-lg'>
                   {formik.isSubmitting ? 'Please wait...' : 'Sign In'}
                 </button>
               </div>
