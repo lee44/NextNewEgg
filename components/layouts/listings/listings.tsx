@@ -7,7 +7,7 @@ type ListingsProps = {
   products: Products[]
 }
 
-const Listings: React.FunctionComponent<ListingsProps> = ({ products }) => {
+const Listings = ({ products }: ListingsProps) => {
   return (
     <div className='container'>
       {products.map((category) =>

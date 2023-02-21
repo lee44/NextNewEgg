@@ -6,7 +6,7 @@ type Card = {
   product: Product
 }
 
-const Card: React.FunctionComponent<Card> = ({ product }) => {
+const Card = ({ product }: Card) => {
   return (
     <div className='grid grid-cols-2  bg-card-bg rounded-md md:p-5 p-4 h-full'>
       <ul className='flex flex-col justify-center '>
@@ -22,7 +22,7 @@ const Card: React.FunctionComponent<Card> = ({ product }) => {
         </li>
       </ul>
       <div className='relative h-full min-h-[125px]'>
-        <Image src={product.img || ''} alt='product' className='object-contain' fill sizes='min-width: 100%;' />
+        <Image src={product.img || ''} alt='product' className='object-contain' fill sizes='max-width:200px' />
       </div>
     </div>
   )

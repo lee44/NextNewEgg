@@ -6,7 +6,7 @@ type OauthButton = {
   provider: ClientSafeProvider
 }
 
-const OauthButton: React.FunctionComponent<OauthButton> = ({ provider }) => {
+const OauthButton = ({ provider }: OauthButton) => {
   let imgSrc = ''
   if (provider.name === 'GitHub') {
     imgSrc = '/icons/github.png'
