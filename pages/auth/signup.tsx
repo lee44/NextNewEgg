@@ -3,7 +3,7 @@ import Image from 'next/image'
 import CredentialForms from '../../components/templates/credentialForms'
 import { ClientSafeProvider, getCsrfToken, getProviders } from 'next-auth/react'
 import { GetServerSideProps } from 'next'
-import OauthButton from '../../components/templates/oauthbutton'
+import OauthButton from '../../components/templates/oauthButton'
 
 type SignUpProps = {
   providers: ClientSafeProvider
@@ -18,7 +18,7 @@ const SignUp = ({ providers, error, csrfToken }: SignUpProps) => {
         <div className='max-w-[400px] flex flex-col justify-center items-center gap-y-4 border-1 p-12 rounded-md bg-card-bg'>
           <Image src={'/icons/newegg.png'} alt='product' className='' width={135} height={115} priority />
           <h5 className='text-white'>Sign Up</h5>
-          <CredentialForms formType='Sign Up' fields={['First Name', 'Last Name', 'Email', 'Password']} csrfToken={csrfToken} />
+          <CredentialForms formType={'Sign Up'} fields={['Name', 'Email', 'Password']} csrfToken={csrfToken} />
 
           {Object.values(providers)
             .filter((provider) => provider.name !== 'Credentials')

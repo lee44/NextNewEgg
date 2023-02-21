@@ -16,7 +16,7 @@ const OauthButton = ({ provider }: OauthButton) => {
   return (
     <button
       className='w-full flex justify-end gap-x-10 text-white border-2 py-4 px-8 rounded-md hover:bg-button-hover hover:border-transparent'
-      onClick={() => signIn(provider.id, { callbackUrl: 'http://localhost:3000/profile' })}
+      onClick={() => signIn(provider.id, { callbackUrl: 'http://localhost:3000' })}
     >
       <Image src={imgSrc} alt='icon' className='' width={25} height={25} />
       <span className='text-lg'>Sign in with {provider.name}</span>

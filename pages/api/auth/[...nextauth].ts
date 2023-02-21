@@ -102,7 +102,7 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
     // Callbacks are asynchronous functions you can use to control what happens when an action is performed
     callbacks: {
       async redirect({ url, baseUrl }) {
-        console.log('Callback redirect', url, baseUrl)
+        console.log('Callback redirect')
         return url
       },
       async session({ session, user }) {
