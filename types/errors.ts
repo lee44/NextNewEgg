@@ -13,7 +13,7 @@ export const errorMessage = (error: string | string[] | undefined) => {
     case 'OAuthAccountNotLinked':
       return '(OAuthAccountNotLinked) If the email on the account is already linked, but not with this OAuth account'
     case 'EmailSignin':
-      return '(EmailSignin) Sending the e-mail with the verification token failed'
+      return '(EmailSignin) Please provide an email address to send a verfication email'
     case 'CredentialsSignin':
       return '(CredentialsSignin) The authorize callback returned null in the Credentials provider'
     case 'SessionRequired':
