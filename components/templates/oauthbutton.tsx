@@ -12,10 +12,12 @@ const OauthButton = ({ provider }: OauthButton) => {
     imgSrc = '/icons/github.png'
   } else if (provider.name === 'Google') {
     imgSrc = '/icons/google.png'
+  } else {
+    imgSrc = '/icons/email.png'
   }
   return (
     <button
-      className='w-full flex justify-end gap-x-10 text-white border-2 py-4 px-8 rounded-md hover:bg-button-hover hover:border-transparent'
+      className='w-full flex gap-x-10 text-white border-2 py-4 px-8 rounded-md hover:bg-button-hover hover:border-transparent'
       onClick={() => signIn(provider.id, { callbackUrl: 'http://localhost:3000' })}
     >
       <Image src={imgSrc} alt='icon' className='' width={25} height={25} />

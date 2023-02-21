@@ -2,6 +2,7 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
 import NextAuth, { AuthOptions } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
+import EmailProvider from 'next-auth/providers/email'
 import prisma from '../../../prisma/lib/prisma'
 import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
@@ -13,22 +14,6 @@ import { encode, decode } from 'next-auth/jwt'
 
 const getAdapter = () => ({
   ...PrismaAdapter(prisma),
-  // async getSessionAndUser(sessionToken: string) {
-  //   const session = await prisma.session.findUnique({
-  //     where: {
-  //       sessionToken: sessionToken,
-  //     },
-  //   })
-  //   const user = await prisma.user.findUnique({
-  //     where: {
-  //       id: session?.userId,
-  //     },
-  //   })
-  //   console.log('SESSION USER :', session, user)
-  //   if (!user || !session) return null
-
-  //   return { user: user, session: session }
-  // },
 })
 
 const session = {
@@ -56,6 +41,10 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
         clientId: process.env.GOOGLE_CLIENT_ID as string,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
         allowDangerousEmailAccountLinking: true,
+      }),
+      EmailProvider({
+        server: process.env.EMAIL_SERVER,
+        from: process.env.EMAIL_FROM,
       }),
       CredentialsProvider({
         name: 'Credentials',
