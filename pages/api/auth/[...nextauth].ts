@@ -5,7 +5,7 @@ import GithubProvider from 'next-auth/providers/github'
 import prisma from '../../../prisma/lib/prisma'
 import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import bcrypt from 'bcrypt-ts'
+import * as bcrypt from 'bcrypt-ts'
 import { randomUUID } from 'crypto'
 import Cookies from 'cookies'
 
@@ -68,9 +68,8 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
           try {
             const user = await prisma.user.findFirst({ where: { email: credentials?.email } })
             if (user !== null) {
-              //const res = await bcrypt.compare(credentials?.password as string, user?.password as string)
-              // if (res === true) {
-              if (credentials?.password === user?.password) {
+              const res = await bcrypt.compare(credentials?.password as string, user?.password as string)
+              if (res) {
                 let userAccount = {
                   id: user.id,
                   name: user.name,
@@ -184,74 +183,43 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
     },
   }
 }
-
+// First function to be called in the authentication flow
 const authHandler: NextApiHandler = async (req, res) => {
   if (req?.query?.nextauth?.includes('callback') && req.method === 'GET') {
     console.log('GET Request')
   } else if (req?.query?.nextauth?.includes('callback') && req.method === 'POST') {
     console.log('POST Request')
 
-    // const { name, email, password, confirm, csrfToken } = req.body
+    const { name, email, password, confirm, csrfToken } = req.body
 
-    // if (!(name && email && password && confirm && password.length >= 1)) {
-    //   res.status(400).json({
-    //     statusText: 'Invalid user parameters',
-    //   })
-    // }
+    try {
+      const userExists = await prisma.user.findFirst({
+        where: {
+          email: email,
+        },
+      })
 
-    // if (password != confirm) {
-    //   res.status(400).json({
-    //     statusText: 'Password mismatch',
-    //   })
-    // }
+      if (!userExists) {
+        const user = await prisma.user.create({
+          data: {
+            name: name,
+            email: email,
+            password: bcrypt.hashSync(password),
+          },
+        })
 
-    // const profileExists = await prisma.user.findMany({
-    //   where: {
-    //     name: name,
-    //     email: email,
-    //   },
-    // })
-
-    // if (profileExists && Array.isArray(profileExists) && profileExists.length > 0) {
-    //   res.status(403).json({
-    //     statusText: 'User already exists',
-    //   })
-    // }
-
-    // const user = await prisma.user.create({
-    //   data: {
-    //     name: name,
-    //     email: email,
-    //     password: bcrypt.hashSync(password),
-    //   },
-    // })
-
-    // if (!user) {
-    //   res.status(500).json({
-    //     statusText: 'Unable to create user account',
-    //   })
-    // }
-
-    // const account = await prisma.account.create({
-    //   data: {
-    //     userId: user.id,
-    //     type: 'credentials',
-    //     provider: 'credentials',
-    //     providerAccountId: user.id,
-    //   },
-    // })
-
-    // if (user && account) {
-    //   res.status(200).json({
-    //     id: user.id,
-    //     name: user.name,
-    //     email: user.email,
-    //   })
-    // } else {
-    //   res.status(500).json({
-    //     statusText: 'Unable to link account to created user profile',
-    //   })
-    // }
+        const account = await prisma.account.create({
+          data: {
+            userId: user.id,
+            type: 'credentials',
+            provider: 'credentials',
+            providerAccountId: user.id,
+          },
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return await NextAuth(req, res, authOptions(req, res))

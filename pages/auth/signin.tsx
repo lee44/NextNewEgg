@@ -48,7 +48,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return { redirect: { destination: '/profile', permanent: false } }
   }
 
-  console.log('Context QUERY', context.query)
+  // console.log('Context QUERY', context.query)
 
   const providers = await getProviders()
 

@@ -23,23 +23,13 @@ const CredentialForms = ({ formType, fields, csrfToken }: CredentialForms) => {
           password: Yup.string().required('Please enter your password'),
         })}
         onSubmit={async (values, { setSubmitting }) => {
-          console.log('onSubmit called')
+          const res = await signIn('credentials', {
+            name: values?.name,
+            email: values.email,
+            password: values.password,
+            callbackUrl: 'http://localhost:3000',
+          })
 
-          let res = null
-          if (formType === 'Sign Up') {
-            res = await signIn('credentials', {
-              name: values.name,
-              email: values.email,
-              password: values.password,
-              callbackUrl: 'http://localhost:3000',
-            })
-          } else {
-            res = await signIn('credentials', {
-              email: values.email,
-              password: values.password,
-              callbackUrl: 'http://localhost:3000',
-            })
-          }
           if (res?.error) {
             setError(res?.error)
           } else {
