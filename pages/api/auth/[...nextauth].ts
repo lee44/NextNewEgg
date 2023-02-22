@@ -63,6 +63,7 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
                   id: user.id,
                   name: user.name,
                   email: user.email,
+                  role: user.role || 'user',
                 }
                 console.log(`User ${user.name} has been authorized`)
                 return userAccount
@@ -93,8 +94,18 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
         console.log('Callback redirect')
         return url
       },
-      async session({ session, user }) {
-        console.log('Session callback')
+      async jwt({ token, user }) {
+        console.log('JWT callback')
+
+        if (user) {
+          token.role = user.role
+          console.log('Token', token)
+        }
+        return token
+      },
+      async session({ session, user, token }) {
+        console.log('Session callback', 'Token Role', token)
+        // session.user.role = token.role
         return session
       },
       async signIn({ user }) {
@@ -194,6 +205,7 @@ const authHandler: NextApiHandler = async (req, res) => {
             name: name,
             email: email,
             password: bcrypt.hashSync(password),
+            role: 'user',
           },
         })
 

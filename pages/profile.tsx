@@ -7,9 +7,9 @@ import { useSession } from 'next-auth/react'
 const Profile = () => {
   console.log('Profile Page is loaded')
 
-  const { status } = useSession({
-    required: true,
-  })
+  // const { status } = useSession({
+  //   required: true,
+  // })
 
   return (
     <div>
