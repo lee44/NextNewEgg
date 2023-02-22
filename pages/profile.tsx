@@ -2,30 +2,31 @@ import React from 'react'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from './api/auth/[...nextauth]'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { useSession } from 'next-auth/react'
+import { getSession, useSession } from 'next-auth/react'
+import { Session } from 'next-auth'
 
-const Profile = () => {
-  console.log('Profile Page is loaded')
+type ProfileProps = {
+  session: Session | null
+}
 
+const Profile = ({ session }: ProfileProps) => {
   return (
     <div>
-      <h1>Profile</h1>
+      <h1>Profile Page</h1>
     </div>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  // @ts-ignore
-  const session = await getServerSession(context.req, context.res, authOptions)
+  const session = await getSession(context)
 
   if (!session) {
-    console.log('Redirecting to Sign In page')
-
+    console.log('Redirecting to SignIn page from Profile Page')
     return { redirect: { destination: '/auth/signin', permanent: false } }
   }
 
   return {
-    props: {},
+    props: { session: session },
   }
 }
 

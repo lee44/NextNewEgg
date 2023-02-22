@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next'
 import { Session } from 'next-auth'
 import { getServerSession } from 'next-auth/next'
+import { getSession } from 'next-auth/react'
 import React from 'react'
 import { authOptions } from './api/auth/[...nextauth]'
 
@@ -27,15 +28,15 @@ const Admin = ({ session }: AdminProps) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  // @ts-ignore
-  const session = await getServerSession(context.req, context.res, authOptions)
+  const session = await getSession(context)
 
-  //   if (!session) {
-  //     console.log('Redirecting to Sign In page')
-  //     return { redirect: { destination: '/auth/signin', permanent: false } }
-  //   }
-
-  console.log(session)
+  if (!session) {
+    console.log('Redirecting to Sign In page from Admin Page')
+    return { redirect: { destination: '/auth/signin', permanent: false } }
+  } else if (session.user.role !== 'admin') {
+    console.log('Redirecting to Home Page from Admin Page')
+    return { redirect: { destination: '/', permanent: false } }
+  }
 
   return {
     props: { session: session },

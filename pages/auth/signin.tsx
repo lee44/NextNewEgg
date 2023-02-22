@@ -1,5 +1,5 @@
 import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
-import { ClientSafeProvider, getCsrfToken, getProviders, signIn } from 'next-auth/react'
+import { ClientSafeProvider, getCsrfToken, getProviders, getSession, signIn } from 'next-auth/react'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../api/auth/[...nextauth]'
 import ErrorMessage from '../../components/elements/errorMessage'
@@ -39,8 +39,8 @@ const SignIn = ({ providers, error, csrfToken }: SignInProps) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  // @ts-ignore
-  const session = await getServerSession(context.req, context.res, authOptions)
+  
+  const session = await getSession(context)
 
   if (session) {
     console.log('Redirecting to profile page')
