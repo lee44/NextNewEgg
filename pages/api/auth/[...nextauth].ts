@@ -8,7 +8,7 @@ import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import * as bcrypt from 'bcrypt-ts'
 import { randomUUID } from 'crypto'
-import Cookies from 'cookies'
+import { setCookie, getCookie } from 'cookies-next'
 
 import { encode, decode } from 'next-auth/jwt'
 
@@ -99,13 +99,12 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
 
         if (user) {
           token.role = user.role
-          console.log('Token', token)
         }
         return token
       },
       async session({ session, user, token }) {
-        console.log('Session callback', 'Token Role', token)
-        // session.user.role = token.role
+        console.log('Session callback')
+        session.user.role = user.role
         return session
       },
       async signIn({ user }) {
@@ -121,11 +120,10 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
               expires: sessionExpiry,
             })
 
-            const cookies = new Cookies(req, res)
-            console.log('SessionToken', sessionToken)
-
-            cookies.set('next-auth.session-token', sessionToken, {
+            setCookie('next-auth.session-token', sessionToken, {
               expires: sessionExpiry,
+              req: req,
+              res: res,
             })
           }
         }
@@ -135,12 +133,11 @@ export const authOptions = (req: NextApiRequest, res: NextApiResponse): AuthOpti
     jwt: {
       encode: async (params) => {
         if (req.query.nextauth?.includes('callback') && req.query.nextauth?.includes('credentials') && req.method === 'POST') {
-          const cookies = new Cookies(req, res)
+          const cookie = getCookie('next-auth.session-token', { req: req })
 
-          const cookie = cookies.get('next-auth.session-token')
-          // console.log('Cookie', cookies.request.headers.cookie)
+          console.log('Cookie: ', cookie)
 
-          if (cookie) return cookie
+          if (cookie) return cookie as string
           else return ''
         }
         // Revert to default behaviour when not in the credentials provider callback flow

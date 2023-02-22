@@ -1,16 +1,19 @@
 import { withAuth } from 'next-auth/middleware'
 
+// Only works with JWT strategy
 export default withAuth(
-  // `withAuth` augments your `Request` with the user's token.
   function middleware(req) {
     console.log('Middleware Called')
   },
   {
     callbacks: {
-      authorized: ({ token }) => true,
+      authorized: ({ token }) => {
+        console.log('Middleware Callback', token)
+        return true
+      },
       // authorized: ({ token }) => token?.role === 'admin',
     },
   }
 )
 
-export const config = { matcher: ['/'] }
+export const config = { matcher: ['/profile'] }
