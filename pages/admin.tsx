@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next'
 import { Session } from 'next-auth'
 import { getServerSession } from 'next-auth/next'
-import { getSession } from 'next-auth/react'
+import { getSession, useSession } from 'next-auth/react'
 import React from 'react'
 import { authOptions } from './api/auth/[...nextauth]'
 
@@ -10,21 +10,15 @@ type AdminProps = {
 }
 
 // Admin will be able to modify user
-const Admin = ({ session }: AdminProps) => {
-  if (session && session.user.role === 'admin') {
-    return (
-      <div>
-        <h1>Admin</h1>
-        <p>Welcome to the Admin Portal!</p>
-      </div>
-    )
-  } else {
-    return (
-      <div>
-        <h1>You are not authorized to view this page!</h1>
-      </div>
-    )
-  }
+const Admin = () => {
+  const { data: session } = useSession({ required: true })
+
+  return (
+    <div>
+      <h1>Admin</h1>
+      <p>Welcome to the Admin Portal!</p>
+    </div>
+  )
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -39,7 +33,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   return {
-    props: { session: session },
+    props: {  },
   }
 }
 

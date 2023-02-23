@@ -39,13 +39,12 @@ const SignIn = ({ providers, error, csrfToken }: SignInProps) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  
   const session = await getSession(context)
 
   if (session) {
     console.log('Redirecting to profile page')
 
-    return { redirect: { destination: '/profile', permanent: false } }
+    return { redirect: { destination: '/', permanent: false } }
   }
 
   // console.log('Context QUERY', context.query)

@@ -9,7 +9,9 @@ type ProfileProps = {
   session: Session | null
 }
 
-const Profile = ({ session }: ProfileProps) => {
+const Profile = () => {
+  const { data: session } = useSession({ required: true })
+
   return (
     <div>
       <h1>Profile Page</h1>
@@ -26,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   return {
-    props: { session: session },
+    props: {  },
   }
 }
 
