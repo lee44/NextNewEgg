@@ -11,7 +11,7 @@ type AdminProps = {
 
 // Admin will be able to modify user
 const Admin = () => {
-  const { data: session } = useSession({ required: true })
+  //   const { data: session } = useSession({ required: true })
 
   return (
     <div>
@@ -33,8 +33,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   return {
-    props: {  },
+    props: {},
   }
 }
+
+Admin.auth = true
 
 export default Admin

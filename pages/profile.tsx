@@ -10,7 +10,7 @@ type ProfileProps = {
 }
 
 const Profile = () => {
-  const { data: session } = useSession({ required: true })
+  // const { data: session } = useSession({ required: true })
 
   return (
     <div>
@@ -28,8 +28,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   return {
-    props: {  },
+    props: {},
   }
 }
+
+Profile.auth = true
 
 export default Profile
