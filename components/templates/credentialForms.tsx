@@ -3,6 +3,7 @@ import { signIn, getCsrfToken } from 'next-auth/react'
 import { Formik, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 type CredentialForms = {
   formType: string
@@ -12,6 +13,8 @@ type CredentialForms = {
 
 const CredentialForms = ({ formType, fields, csrfToken }: CredentialForms) => {
   const [error, setError] = useState<string | null>('')
+  const router = useRouter()
+  const callbackUrl = (router.query?.callbackUrl as string) ?? '/'
 
   return (
     <>
@@ -27,7 +30,7 @@ const CredentialForms = ({ formType, fields, csrfToken }: CredentialForms) => {
             name: values?.name,
             email: values.email,
             password: values.password,
-            callbackUrl: 'http://localhost:3000',
+            callbackUrl: callbackUrl,
           })
 
           if (res?.error) {

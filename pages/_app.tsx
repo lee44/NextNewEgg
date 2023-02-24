@@ -27,11 +27,11 @@ function MyApp({ Component, pageProps }: CustomAppProps) {
 }
 
 const Auth = (props: { children: JSX.Element }) => {
-  const { status } = useSession({ required: true })
+  // const { status } = useSession({ required: true })
 
-  if (status === 'loading') {
-    return <div>Loading...</div>
-  }
+  // if (status === 'loading') {
+  //   return <div>Loading...</div>
+  // }
 
   return props.children
 }

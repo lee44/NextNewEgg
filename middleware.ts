@@ -13,15 +13,19 @@ export const middleware = async (req: NextRequest, ev: NextFetchEvent) => {
 
   // @ts-ignore
   const session = await getSession({ req: requestForNextAuth })
-  console.log(session)
+  console.log('Seession', session)
 
   if (!session) {
-    redirectToSignIn(req)
+    const signInUrl = new URL('/auth/signin', req.nextUrl.origin)
+    signInUrl.searchParams.append('callbackUrl', req.url)
+    return NextResponse.redirect(signInUrl)
   }
 
   if (req.nextUrl.pathname.startsWith('/admin')) {
     if (session?.user.role !== 'admin') {
-      redirectToSignIn(req)
+      const signInUrl = new URL('/auth/signin', req.nextUrl.origin)
+      signInUrl.searchParams.append('callbackUrl', req.url)
+      return NextResponse.redirect(signInUrl)
     }
   } else if (req.nextUrl.pathname.startsWith('/profile')) {
   }
@@ -30,11 +34,4 @@ export const middleware = async (req: NextRequest, ev: NextFetchEvent) => {
 
 export const config = {
   matcher: ['/admin', '/profile'],
-}
-
-const redirectToSignIn = (req: NextRequest) => {
-  const signInPage = '/auth/signin'
-  const signInUrl = new URL(signInPage, req.nextUrl.origin)
-  signInUrl.searchParams.append('callbackUrl', req.url)
-  return NextResponse.redirect(signInUrl)
 }

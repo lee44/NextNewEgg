@@ -22,15 +22,15 @@ const Admin = () => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession(context)
+  // const session = await getSession(context)
 
-  if (!session) {
-    console.log('Redirecting to Sign In page from Admin Page')
-    return { redirect: { destination: '/auth/signin', permanent: false } }
-  } else if (session.user.role !== 'admin') {
-    console.log('Redirecting to Home Page from Admin Page')
-    return { redirect: { destination: '/', permanent: false } }
-  }
+  // if (!session) {
+  //   console.log('Redirecting to Sign In page from Admin Page')
+  //   return { redirect: { destination: '/auth/signin', permanent: false } }
+  // } else if (session.user.role !== 'admin') {
+  //   console.log('Redirecting to Home Page from Admin Page')
+  //   return { redirect: { destination: '/', permanent: false } }
+  // }
 
   return {
     props: {},

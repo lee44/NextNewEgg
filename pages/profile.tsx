@@ -20,12 +20,12 @@ const Profile = () => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession(context)
+  // const session = await getSession(context)
 
-  if (!session) {
-    console.log('Redirecting to SignIn page from Profile Page')
-    return { redirect: { destination: '/auth/signin', permanent: false } }
-  }
+  // if (!session) {
+  //   console.log('Redirecting to SignIn page from Profile Page')
+  //   return { redirect: { destination: '/auth/signin', permanent: false } }
+  // }
 
   return {
     props: {},
