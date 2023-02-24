@@ -1,19 +1,40 @@
-import { withAuth } from 'next-auth/middleware'
+import type { NextFetchEvent, NextRequest } from 'next/server'
+import { getSession } from 'next-auth/react'
+import { NextResponse } from 'next/server'
 
-// Only works with JWT strategy
-export default withAuth(
-  function middleware(req) {
-    console.log('Middleware Called')
-  },
-  {
-    callbacks: {
-      authorized: ({ token }) => {
-        console.log('Middleware Callback', token)
-        return true
-      },
-      // authorized: ({ token }) => token?.role === 'admin',
+export const middleware = async (req: NextRequest, ev: NextFetchEvent) => {
+  console.log('Middleware Called')
+
+  const requestForNextAuth = {
+    headers: {
+      cookie: req.headers.get('cookie'),
     },
   }
-)
 
-export const config = { matcher: ['/profile'] }
+  // @ts-ignore
+  const session = await getSession({ req: requestForNextAuth })
+  console.log(session)
+
+  if (!session) {
+    redirectToSignIn(req)
+  }
+
+  if (req.nextUrl.pathname.startsWith('/admin')) {
+    if (session?.user.role !== 'admin') {
+      redirectToSignIn(req)
+    }
+  } else if (req.nextUrl.pathname.startsWith('/profile')) {
+  }
+  return NextResponse.next()
+}
+
+export const config = {
+  matcher: ['/admin', '/profile'],
+}
+
+const redirectToSignIn = (req: NextRequest) => {
+  const signInPage = '/auth/signin'
+  const signInUrl = new URL(signInPage, req.nextUrl.origin)
+  signInUrl.searchParams.append('callbackUrl', req.url)
+  return NextResponse.redirect(signInUrl)
+}
