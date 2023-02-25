@@ -10,8 +10,6 @@ type ProfileProps = {
 }
 
 const Profile = () => {
-  // const { data: session } = useSession({ required: true })
-
   return (
     <div>
       <h1>Profile Page</h1>

@@ -14,7 +14,7 @@ type CredentialForms = {
 const CredentialForms = ({ formType, fields, csrfToken }: CredentialForms) => {
   const [error, setError] = useState<string | null>('')
   const router = useRouter()
-  const callbackUrl = (router.query?.callbackUrl as string) ?? '/'
+  const callbackUrl = (router.query?.callbackUrl as string) ?? 'http://localhost:3000'
 
   return (
     <>
