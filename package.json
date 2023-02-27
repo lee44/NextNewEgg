@@ -24,6 +24,7 @@
     "react-dom": "18.2.0",
     "react-toggle-dark-mode": "^1.1.1",
     "ts-node": "^10.9.1",
+    "tw-elements": "^1.0.0-beta1",
     "yup": "^1.0.0"
   },
   "devDependencies": {

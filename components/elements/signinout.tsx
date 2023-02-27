@@ -15,7 +15,6 @@ const SignInOut = () => {
   }
   return (
     <>
-      <Button text={'Sign Up'} url={'/auth/signup'} />
       <Button text={'Sign In'} url={'/auth/signin'} />
     </>
   )

@@ -8,7 +8,7 @@ type ButtongProps = {
 }
 const Button: FunctionComponent<ButtongProps> = ({ text, url, onClick }) => {
   return (
-    <Link className='p-3 rounded-md bg-button hover:bg-button-hover text-white' href={url} onClick={onClick}>
+    <Link className='p-3 rounded-md bg-button hover:bg-button-hover text-white font-bold' href={url} onClick={onClick}>
       {text}
     </Link>
   )

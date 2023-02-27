@@ -1,6 +1,7 @@
 import { Product } from '@prisma/client'
 import Image from 'next/image'
 import React, { ReactComponentElement } from 'react'
+import StarRating from '../elements/starrating'
 
 type Card = {
   product: Product
@@ -9,8 +10,8 @@ type Card = {
 const Card = ({ product }: Card) => {
   return (
     <div className='grid grid-cols-2  bg-card-bg rounded-md md:p-5 p-4 h-full'>
-      <ul className='flex flex-col justify-center '>
-        <li className='dark:text-white'>{product.stars}</li>
+      <ul className='flex flex-col justify-center'>
+        <StarRating stars={product.stars || 0} />
         <li>
           <h5 className='text-left dark:text-white'>{product.name}</h5>
         </li>
@@ -21,8 +22,8 @@ const Card = ({ product }: Card) => {
           <p className='text-left italic dark:text-white'>{product.free_shipping ? 'FREE SHIPPING' : ''}</p>
         </li>
       </ul>
-      <div className='relative h-full min-h-[125px]'>
-        <Image src={product.img || ''} alt='product' className='object-contain' fill sizes='max-width:200px' />
+      <div className='relative h-full'>
+        <Image src={product.img || ''} alt='product' className='' width={125} height={125} />
       </div>
     </div>
   )
