@@ -23,7 +23,15 @@ const Card = ({ product }: Card) => {
         </li>
       </ul>
       <div className='relative h-full'>
-        <Image src={product.img || ''} alt='product' className='' width={125} height={125} />
+        <Image
+          src={product.img || ''}
+          alt='product'
+          className='object-contain'
+          fill
+          sizes='max-width: 768px) 100vw,
+              (max-width: 1024px) 50vw,
+              33vw'
+        />
       </div>
     </div>
   )
