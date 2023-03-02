@@ -3,6 +3,8 @@ import { getSession } from 'next-auth/react'
 import { NextResponse } from 'next/server'
 
 export const middleware = async (req: NextRequest, ev: NextFetchEvent) => {
+  // getSession accesses req.headers.cookie but the headers inside req: NextRequest are a Headers object
+  // so we just provide an object that mimics this access behavior
   const requestForNextAuth = {
     headers: {
       cookie: req.headers.get('cookie'),
