@@ -3,7 +3,7 @@ import { Session } from 'next-auth'
 import { getServerSession } from 'next-auth/next'
 import { getSession, useSession } from 'next-auth/react'
 import React from 'react'
-import { authOptions } from './api/auth/[...nextauth]'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 type AdminProps = {
   session: Session | null

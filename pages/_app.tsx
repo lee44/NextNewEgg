@@ -1,8 +1,7 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { SessionProvider, useSession } from 'next-auth/react'
+import { SessionProvider } from 'next-auth/react'
 import { NextComponentType } from 'next'
-import Nav from '../components/layouts/nav/nav'
 import Auth from '../components/layouts/auth/auth'
 import NoAuth from '../components/layouts/noauth/noauth'
 

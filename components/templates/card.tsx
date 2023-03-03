@@ -24,8 +24,7 @@ const Card = ({ product }: Card) => {
       </ul>
       <div className='relative h-full'>
         <Image
-          // src={product.img || ''}
-          src={''}
+          src={product.img || ''}
           alt='product'
           className='object-contain'
           fill

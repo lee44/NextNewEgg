@@ -1,6 +1,6 @@
 import React from 'react'
 import { getServerSession } from 'next-auth/next'
-import { authOptions } from './api/auth/[...nextauth]'
+import { authOptions } from '../api/auth/[...nextauth]'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { getSession, useSession } from 'next-auth/react'
 import { Session } from 'next-auth'
