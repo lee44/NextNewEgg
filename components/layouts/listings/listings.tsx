@@ -1,4 +1,5 @@
 import { Product } from '@prisma/client'
+import Link from 'next/link'
 import React from 'react'
 import { Products } from '../../../types/products'
 import Card from '../../templates/card'
@@ -13,12 +14,14 @@ const Listings = ({ products }: ListingsProps) => {
       {products.map((category) =>
         Object.keys(category).map((categoryKey, index) => (
           <div key={index} className='mb-16'>
-            <h3 className='dark:text-white'>{categoryKey}</h3>
+            <h3 className='mt-0 dark:text-white'>{categoryKey}</h3>
             <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3	gap-4 auto-rows-fr'>
               {category[categoryKey].map((product, index) => {
                 return (
                   <li key={index}>
-                    <Card product={product} />
+                    <Link href={`/product/${product.productId}`}>
+                      <Card product={product} />
+                    </Link>
                   </li>
                 )
               })}

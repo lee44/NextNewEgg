@@ -9,7 +9,7 @@ type Card = {
 
 const Card = ({ product }: Card) => {
   return (
-    <div className='grid grid-cols-2  bg-card-bg rounded-md md:p-5 p-4 h-full'>
+    <div className='grid grid-cols-2 bg-card-bg rounded-md md:p-5 p-4 h-full'>
       <ul className='flex flex-col justify-center gap-y-2'>
         <StarRating stars={product.stars || 0} />
         <li className='h-20 flex flex-col justify-center'>

@@ -19,7 +19,7 @@ const SignIn = ({ providers, error, csrfToken }: SignInProps) => {
 
   return (
     <>
-      <div className='h-screen flex items-center justify-center bg-primary-bg'>
+      <div className='h-screen flex items-center justify-center'>
         <div className='max-w-[400px] flex flex-col justify-center items-center gap-y-4 border-1 p-12 rounded-md bg-card-bg'>
           <Image src={'/icons/newegg.png'} alt='product' className='' width={135} height={115} priority />
           <h5 className='text-white'>Sign In</h5>

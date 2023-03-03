@@ -18,10 +18,7 @@ const Home: NextPage<HomeProps> = (props) => {
         <meta name='description' content='' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <header className='dark:bg-primary z-[99]'>
-        <Nav />
-      </header>
-      <main className='py-10 mt-20 dark:bg-primary-bg'>
+      <main className='pt-8'>
         <Listings products={props.products} />
       </main>
       <footer></footer>
