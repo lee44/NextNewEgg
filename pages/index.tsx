@@ -12,7 +12,7 @@ type HomeProps = {
 
 const Home: NextPage<HomeProps> = (props) => {
   return (
-    <div className='h-screen'>
+    <div className=''>
       <Head>
         <title>NextNewEgg</title>
         <meta name='description' content='' />

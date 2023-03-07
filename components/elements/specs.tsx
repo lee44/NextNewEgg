@@ -19,10 +19,13 @@ const Specs = ({ product }: ProductListingProps) => {
     product.GPUSpecs ||
     product.MotherboardSpecs ||
     {}
+
   return (
-    <ul>
+    <ul className='list-disc ml-4'>
       {Object.entries(specs).map((spec, index) => {
-        return <li key={index}>{spec[0] + ':' + spec[1]}</li>
+        if (!['id', 'productId'].includes(spec[0])) {
+          return <li key={index}>{spec[0] + ': ' + spec[1]}</li>
+        }
       })}
     </ul>
   )

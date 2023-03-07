@@ -19,6 +19,7 @@ import prisma from '../../prisma/lib/prisma'
 import Image from 'next/image'
 import StarRating from '../../components/elements/starrating'
 import Specs from '../../components/elements/specs'
+import ProductBuyBox from '../../components/elements/productBuyBox'
 
 export type ProductListingProps = {
   product: Product & {
@@ -37,22 +38,22 @@ export type ProductListingProps = {
 }
 
 const ProductListing = ({ product }: ProductListingProps) => {
-  console.log(product.CPUSpecs)
-
   return (
-    <div className='dark:bg-secondary-bg'>
-      <ul className='container grid xl:grid-cols-3 gap-2 pt-8'>
-        <li className='h-screen flex flex-col justify-start items-center col-span-1 relative'>
-          <Image src={product.img || ''} alt='product' className='object-contain' width={350} height={150} />
+    <div className='h-screen dark:bg-secondary-bg'>
+      <ul className='container xl:grid xl:grid-cols-4 xl:gap-4 flex flex-col gap-8 pt-8'>
+        <li className='flex flex-col justify-start items-center col-span-1 relative'>
+          <Image src={product.img || ''} alt='product' className='object-contain' width={325} height={150} />
         </li>
-        <li className='col-span-1'>
-          <div>
-            <h5>{product?.full_name}</h5>
+        <li className='col-span-2'>
+          <div className='flex flex-col gap-y-3'>
+            <h5 className='text-left'>{product?.full_name}</h5>
             <StarRating stars={product.stars} />
             <Specs product={product} />
           </div>
         </li>
-        <li className='col-span-1'></li>
+        <li className='col-span-1'>
+          <ProductBuyBox product={product} />
+        </li>
       </ul>
     </div>
   )

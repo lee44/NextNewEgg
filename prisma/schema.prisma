@@ -86,10 +86,10 @@ model Product {
   stock         Int
   shipped_by    String
   free_shipping Boolean
-  price         Float?
-  discount      Int?
-  reviews       Int?
-  stars         Float?
+  price         Float
+  discount      Int
+  reviews       Int
+  stars         Float
   img           String?
   release_date  DateTime
   created_at    DateTime @default(now())

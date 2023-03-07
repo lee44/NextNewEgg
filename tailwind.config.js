@@ -27,6 +27,7 @@ module.exports = {
         'button-hover': '#f46500',
         'primary-bg': '#121212',
         'secondary-bg': '#202020',
+        'tertiary-bg': '#333',
         'card-bg': '#212121',
       },
     },

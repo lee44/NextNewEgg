@@ -6,9 +6,10 @@ type ButtongProps = {
   url: string
   onClick?: () => void
 }
-const Button: FunctionComponent<ButtongProps> = ({ text, url, onClick }) => {
+
+const Button = ({ text, url, onClick }: ButtongProps) => {
   return (
-    <Link className='p-3 rounded-md bg-button hover:bg-button-hover text-white font-bold' href={url} onClick={onClick}>
+    <Link className='flex justify-center p-3 rounded-md bg-button hover:bg-button-hover text-white font-bold' href={url} onClick={onClick}>
       {text}
     </Link>
   )
