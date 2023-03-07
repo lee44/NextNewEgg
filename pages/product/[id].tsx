@@ -1,4 +1,17 @@
-import { Product } from '@prisma/client'
+import {
+  CaseFanSpecs,
+  CaseSpecs,
+  CPUFanSpecs,
+  CPUSpecs,
+  GPUSpecs,
+  KeyboardSpecs,
+  MotherboardSpecs,
+  MouseSpecs,
+  PowerSupplySpecs,
+  Product,
+  RAMSpecs,
+  StorageSpecs,
+} from '@prisma/client'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import React from 'react'
@@ -6,21 +19,20 @@ import prisma from '../../prisma/lib/prisma'
 import Image from 'next/image'
 import StarRating from '../../components/elements/starrating'
 import Specs from '../../components/elements/specs'
-import { Case, CaseFan, CPU, CPUFan, GPU, Keyboard, Motherboard, Mouse, PowerSupply, RAM } from '../../types/product'
 
 export type ProductListingProps = {
   product: Product & {
-    PowerSupplySpecs?: PowerSupply
-    CaseFanSpecs?: CaseFan
-    RAMSpecs?: RAM
-    MouseSpecs?: Mouse
-    KeyboardSpecs?: Keyboard
-    CPUFanSpecs?: CPUFan
-    CaseSpecs?: Case
-    StorageSpecs?: Storage
-    CPUSpecs?: CPU
-    GPUSpecs?: GPU
-    MotherboardSpecs?: Motherboard
+    PowerSupplySpecs?: PowerSupplySpecs
+    CaseFanSpecs?: CaseFanSpecs
+    RAMSpecs?: RAMSpecs
+    MouseSpecs?: MouseSpecs
+    KeyboardSpecs?: KeyboardSpecs
+    CPUFanSpecs?: CPUFanSpecs
+    CaseSpecs?: CaseSpecs
+    StorageSpecs?: StorageSpecs
+    CPUSpecs?: CPUSpecs
+    GPUSpecs?: GPUSpecs
+    MotherboardSpecs?: MotherboardSpecs
   }
 }
 
