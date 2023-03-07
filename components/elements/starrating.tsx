@@ -1,14 +1,16 @@
 import React from 'react'
 
 type starRatingProp = {
-  stars: number
+  stars: number | null
 }
 
 const StarRating = ({ stars }: starRatingProp) => {
   const renderStars = () => {
     let td = []
+    let starsNumber = stars || 0 // converting the type to only number
+
     for (let i = 0; i < 5; i++) {
-      if (i < stars) {
+      if (i < starsNumber) {
         td.push(
           <li key={i}>
             <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' className='mr-1 h-5 w-5 text-warning'>
@@ -44,7 +46,14 @@ const StarRating = ({ stars }: starRatingProp) => {
     return td
   }
 
-  return <ul className='flex'>{renderStars()}</ul>
+  return (
+    <ul className='flex'>
+      {renderStars()}
+      <li>
+        <span>({stars})</span>
+      </li>
+    </ul>
+  )
 }
 
 export default StarRating

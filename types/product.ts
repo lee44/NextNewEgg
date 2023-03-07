@@ -1,4 +1,4 @@
-export interface Component {
+export interface Product {
   id: string
   title: string
   link: string
@@ -8,59 +8,59 @@ export interface Component {
   model: string
 }
 
-export interface PowerSupply extends Component {
+export interface PowerSupply extends Product {
   power: string
   color: string
   efficiency: string
 }
 
-export interface CaseFan extends Component {
+export interface CaseFan extends Product {
   rpm: string
   airFlow: string
   noiseLevel: string
 }
-export interface RAM extends Component {
+export interface RAM extends Product {
   size: string
   quantity: string
   type: string
 }
-export interface Mouse extends Component {
+export interface Mouse extends Product {
   trackingMethod: string
   color: string
   wireless: string
 }
-export interface Keyboard extends Component {
+export interface Keyboard extends Product {
   style: string
   backlit: string
   color: string
   wireless: string
 }
-export interface CPUFan extends Component {
+export interface CPUFan extends Product {
   rpm: string
   color: string
   noiseLevel: string
 }
-export interface Case extends Component {
+export interface Case extends Product {
   sidePanel: string
   color: string
   cabinetType: string
 }
-export interface Storage extends Component {
+export interface Storage extends Product {
   storageInterface: string
   rpm: string
   type: string
   cacheMemory: string
 }
-export interface CPU extends Component {
+export interface CPU extends Product {
   speed: string
   socketType: string
 }
-export interface GPU extends Component {
+export interface GPU extends Product {
   storageInterface: string
   memory: string
   clockSpeed: string
 }
-export interface Motherboard extends Component {
+export interface Motherboard extends Product {
   formFactor: string
   memorySlots: string
   socketType: string

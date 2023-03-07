@@ -4,12 +4,29 @@ import { ParsedUrlQuery } from 'querystring'
 import React from 'react'
 import prisma from '../../prisma/lib/prisma'
 import Image from 'next/image'
+import StarRating from '../../components/elements/starrating'
+import Specs from '../../components/elements/specs'
+import { Case, CaseFan, CPU, CPUFan, GPU, Keyboard, Motherboard, Mouse, PowerSupply, RAM } from '../../types/product'
 
-type ProductListingProps = {
-  product: Product
+export type ProductListingProps = {
+  product: Product & {
+    PowerSupplySpecs?: PowerSupply
+    CaseFanSpecs?: CaseFan
+    RAMSpecs?: RAM
+    MouseSpecs?: Mouse
+    KeyboardSpecs?: Keyboard
+    CPUFanSpecs?: CPUFan
+    CaseSpecs?: Case
+    StorageSpecs?: Storage
+    CPUSpecs?: CPU
+    GPUSpecs?: GPU
+    MotherboardSpecs?: Motherboard
+  }
 }
 
 const ProductListing = ({ product }: ProductListingProps) => {
+  console.log(product.CPUSpecs)
+
   return (
     <div className='dark:bg-secondary-bg'>
       <ul className='container grid xl:grid-cols-3 gap-2 pt-8'>
@@ -19,6 +36,8 @@ const ProductListing = ({ product }: ProductListingProps) => {
         <li className='col-span-1'>
           <div>
             <h5>{product?.full_name}</h5>
+            <StarRating stars={product.stars} />
+            <Specs product={product} />
           </div>
         </li>
         <li className='col-span-1'></li>
@@ -36,6 +55,19 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   const product = await prisma.product.findFirst({
     where: { productId: id },
+    include: {
+      CPUSpecs: true,
+      PowerSupplySpecs: true,
+      CaseFanSpecs: true,
+      RAMSpecs: true,
+      MouseSpecs: true,
+      KeyboardSpecs: true,
+      CPUFanSpecs: true,
+      CaseSpecs: true,
+      StorageSpecs: true,
+      GPUSpecs: true,
+      MotherboardSpecs: true,
+    },
   })
 
   const serializeProduct = JSON.parse(JSON.stringify(product))

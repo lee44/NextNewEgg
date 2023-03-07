@@ -1,7 +1,7 @@
 import axios from 'axios'
 import prisma from '../prisma/lib/prisma'
 import { Category } from '../enums/category'
-import { Case, CaseFan, Component, CPU, CPUFan, GPU, Keyboard, Motherboard, Mouse, PowerSupply, RAM, Storage } from '../types/components'
+import { Case, CaseFan, Product, CPU, CPUFan, GPU, Keyboard, Motherboard, Mouse, PowerSupply, RAM, Storage } from '../types/product'
 import { RAPIDAPIENDPOINTS } from '../enums/rapidapiendpoints'
 import { data } from './testData'
 
@@ -27,7 +27,7 @@ export const populateProducts = async (componentType: RAPIDAPIENDPOINTS, categor
     const startDate = new Date(2020, 0, 1)
     const endDate = new Date()
 
-    data.map(async (component: Component) => {
+    data.map(async (component: Product) => {
       try {
         await prisma.product.create({
           data: {
