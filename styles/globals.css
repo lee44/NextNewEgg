@@ -42,15 +42,14 @@
     @apply text-sm;
     @apply my-4;
   }
-}
 
-@layer base {
   html {
     font-family: 'Roboto', sans-serif;
   }
 }
 
-:root {}
+:root {
+}
 
 * {
   box-sizing: border-box;
@@ -88,7 +87,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: black;
+  @apply text-black dark:text-white;
 }
 
 header {

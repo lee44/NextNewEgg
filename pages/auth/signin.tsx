@@ -22,7 +22,7 @@ const SignIn = ({ providers, error, csrfToken }: SignInProps) => {
       <div className='h-screen flex items-center justify-center'>
         <div className='max-w-[400px] flex flex-col justify-center items-center gap-y-4 border-1 p-12 rounded-md bg-card-bg'>
           <Image src={'/icons/newegg.png'} alt='product' className='' width={135} height={115} priority />
-          <h5 className='text-white'>Sign In</h5>
+          <h5 className=''>Sign In</h5>
           {error && <ErrorMessage message={error} />}
           <CredentialForms formType='Sign In' fields={['Email', 'Password']} csrfToken={csrfToken} />
           {Object.values(providers)

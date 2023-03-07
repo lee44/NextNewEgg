@@ -13,13 +13,13 @@ const Card = ({ product }: Card) => {
       <ul className='flex flex-col justify-center gap-y-2'>
         <StarRating stars={product.stars || 0} />
         <li className='h-20 flex flex-col justify-center'>
-          <h6 className='text-left dark:text-white'>{product.name}</h6>
+          <h6 className='text-left'>{product.name}</h6>
         </li>
         <li className='h-12 flex flex-col justify-center'>
-          <h3 className='m-0 text-left dark:text-white'>${product.price}</h3>
+          <h3 className='m-0 text-left'>${product.price}</h3>
         </li>
         <li>
-          <p className='h-6 m-0 text-left italic dark:text-white'>{product.free_shipping ? 'FREE SHIPPING' : ''}</p>
+          <p className='h-6 m-0 text-left italic'>{product.free_shipping ? 'FREE SHIPPING' : ''}</p>
         </li>
       </ul>
       <div className='relative h-full'>

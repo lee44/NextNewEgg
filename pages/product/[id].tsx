@@ -14,12 +14,11 @@ const ProductListing = ({ product }: ProductListingProps) => {
     <div className='dark:bg-secondary-bg'>
       <ul className='container grid xl:grid-cols-3 gap-2 pt-8'>
         <li className='h-screen flex flex-col justify-start items-center col-span-1 relative'>
-          <Image src={product.img || ''} alt='product' className='object-contain' width={150} height={150} />
+          <Image src={product.img || ''} alt='product' className='object-contain' width={350} height={150} />
         </li>
         <li className='col-span-1'>
           <div>
-            <h1>ProductListing</h1>
-            <div>{product?.full_name}</div>
+            <h5>{product?.full_name}</h5>
           </div>
         </li>
         <li className='col-span-1'></li>
