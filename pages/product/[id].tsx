@@ -20,6 +20,7 @@ import Image from 'next/image'
 import StarRating from '../../components/elements/starrating'
 import Specs from '../../components/elements/specs'
 import ProductBuyBox from '../../components/elements/productBuyBox'
+import Carousel from '../../components/templates/carousel'
 
 export type ProductListingProps = {
   product: Product & {
@@ -35,11 +36,12 @@ export type ProductListingProps = {
     GPUSpecs?: GPUSpecs
     MotherboardSpecs?: MotherboardSpecs
   }
+  similarProducts?: Product[]
 }
 
-const ProductListing = ({ product }: ProductListingProps) => {
+const ProductListing = ({ product, similarProducts }: ProductListingProps) => {
   return (
-    <div className='h-screen dark:bg-secondary-bg'>
+    <div className='h-screen dark:bg-secondary-bg flex flex-col gap-16'>
       <ul className='container xl:grid xl:grid-cols-4 xl:gap-4 flex flex-col gap-8 pt-8'>
         <li className='flex flex-col justify-start items-center col-span-1 relative'>
           <Image src={product.img || ''} alt='product' className='object-contain' width={325} height={150} />
@@ -55,6 +57,7 @@ const ProductListing = ({ product }: ProductListingProps) => {
           <ProductBuyBox product={product} />
         </li>
       </ul>
+      <Carousel product={product} similarProducts={similarProducts} />
     </div>
   )
 }
@@ -83,10 +86,15 @@ export const getStaticProps: GetStaticProps = async (context) => {
     },
   })
 
+  const similarProducts = await prisma.product.findMany({
+    where: { categoryId: product?.categoryId },
+  })
+
   const serializeProduct = JSON.parse(JSON.stringify(product))
+  const serializeSimilarProducts = JSON.parse(JSON.stringify(similarProducts))
 
   return {
-    props: { product: serializeProduct },
+    props: { product: serializeProduct, similarProducts: serializeSimilarProducts },
   }
 }
 

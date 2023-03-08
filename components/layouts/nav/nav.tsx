@@ -4,7 +4,7 @@ import SignInOut from '../../elements/signinout'
 
 const Nav = () => {
   return (
-    <nav className='dark:bg-primary top-0'>
+    <nav className='fixed top-0 w-screen dark:bg-primary z-50'>
       <div className='container h-20 flex justify-between items-center'>
         <h2 className='sm:text-2xl'>NextNewegg</h2>
         <div className='flex items-center gap-x-6'>

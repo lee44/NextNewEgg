@@ -89,7 +89,7 @@ model Product {
   price         Float
   discount      Int
   reviews       Int
-  stars         Float
+  stars         Float?
   img           String?
   release_date  DateTime
   created_at    DateTime @default(now())
