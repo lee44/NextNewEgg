@@ -4,10 +4,13 @@ import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai'
 import { ProductListingProps } from '../../types/product'
 import Box from './box'
 import SimilarProduct from '../elements/similarProduct'
+import useWindowDimensions from '../../hooks/useWindowDimensions'
 
 const Carousel = ({ product, similarProducts }: ProductListingProps) => {
   const [currentSlide, setCurrentSlide] = useState(0)
-  const totalSlides = Math.ceil((similarProducts?.length ?? 0) / 5)
+  const { width, height } = useWindowDimensions()
+  const productsPerSlide = (width ?? 0) >= 1440 ? 5 : (width ?? 0) >= 1024 ? 4 : (width ?? 0) >= 768 ? 3 : 1
+  const totalSlides = Math.ceil((similarProducts?.length ?? 0) / productsPerSlide)
 
   const handleNextSlide = () => {
     let newSlide = currentSlide === totalSlides - 1 ? 0 : currentSlide + 1
@@ -20,7 +23,7 @@ const Carousel = ({ product, similarProducts }: ProductListingProps) => {
   }
 
   return (
-    <Box>
+    <Box additionalClasses='mt-2 xl:p-8 px-4'>
       <div className='relative'>
         <AiOutlineLeft
           onClick={handlePrevSlide}
@@ -29,7 +32,7 @@ const Carousel = ({ product, similarProducts }: ProductListingProps) => {
         <div className='w-full flex overflow-hidden relative m-auto'>
           <Swipe onSwipeLeft={handleNextSlide} onSwipeRight={handlePrevSlide} className='relative z-10 w-full h-full flex justify-center'>
             {similarProducts?.map((product, index) => {
-              if (Math.floor(index / 5) === currentSlide) {
+              if (Math.floor(index / productsPerSlide) === currentSlide) {
                 return <SimilarProduct key={index} product={product} />
               }
             })}
