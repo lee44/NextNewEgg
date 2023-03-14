@@ -4,9 +4,9 @@ import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../api/auth/[...nextauth]'
 import ErrorMessage from '../../components/elements/errorMessage'
 import Image from 'next/image'
-import CredentialForms from '../../components/templates/credentialForms'
+import CredentialForms from '../../components/elements/credentialForms'
 import { errorMessage } from '../../types/errors'
-import OauthButton from '../../components/templates/oauthbutton'
+import OauthButton from '../../components/elements/oauthbutton'
 
 type SignInProps = {
   providers: ClientSafeProvider

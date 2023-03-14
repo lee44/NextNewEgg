@@ -1,9 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
-import CredentialForms from '../../components/templates/credentialForms'
+import CredentialForms from '../../components/elements/credentialForms'
 import { ClientSafeProvider, getCsrfToken, getProviders } from 'next-auth/react'
 import { GetServerSideProps } from 'next'
-import OauthButton from '../../components/templates/oauthbutton'
+import OauthButton from '../../components/elements/oauthbutton'
 
 type SignUpProps = {
   providers: ClientSafeProvider

@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { ProductBase } from '../../types/product'
-import StarRating from '../elements/starrating'
+import StarRating from './starrating'
 
 const SimilarProduct = ({ product }: ProductBase) => {
   return (

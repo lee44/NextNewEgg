@@ -3,7 +3,7 @@ import Swipe from 'react-easy-swipe'
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai'
 import { ProductListingProps } from '../../types/product'
 import Box from './box'
-import SimilarProduct from './similarProduct'
+import SimilarProduct from '../elements/similarProduct'
 
 const Carousel = ({ product, similarProducts }: ProductListingProps) => {
   const [currentSlide, setCurrentSlide] = useState(0)
