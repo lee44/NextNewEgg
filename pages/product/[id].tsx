@@ -1,17 +1,3 @@
-import {
-  CaseFanSpecs,
-  CaseSpecs,
-  CPUFanSpecs,
-  CPUSpecs,
-  GPUSpecs,
-  KeyboardSpecs,
-  MotherboardSpecs,
-  MouseSpecs,
-  PowerSupplySpecs,
-  Product,
-  RAMSpecs,
-  StorageSpecs,
-} from '@prisma/client'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import React from 'react'
@@ -21,43 +7,30 @@ import StarRating from '../../components/elements/starrating'
 import Specs from '../../components/elements/specs'
 import ProductBuyBox from '../../components/elements/productBuyBox'
 import Carousel from '../../components/templates/carousel'
-
-export type ProductListingProps = {
-  product: Product & {
-    PowerSupplySpecs?: PowerSupplySpecs
-    CaseFanSpecs?: CaseFanSpecs
-    RAMSpecs?: RAMSpecs
-    MouseSpecs?: MouseSpecs
-    KeyboardSpecs?: KeyboardSpecs
-    CPUFanSpecs?: CPUFanSpecs
-    CaseSpecs?: CaseSpecs
-    StorageSpecs?: StorageSpecs
-    CPUSpecs?: CPUSpecs
-    GPUSpecs?: GPUSpecs
-    MotherboardSpecs?: MotherboardSpecs
-  }
-  similarProducts?: Product[]
-}
+import { ProductListingProps } from '../../types/product'
 
 const ProductListing = ({ product, similarProducts }: ProductListingProps) => {
   return (
-    <div className='h-screen dark:bg-secondary-bg flex flex-col gap-16'>
-      <ul className='container xl:grid xl:grid-cols-4 xl:gap-4 flex flex-col gap-8 pt-8'>
-        <li className='flex flex-col justify-start items-center col-span-1 relative'>
-          <Image src={product.img || ''} alt='product' className='object-contain' width={325} height={150} />
-        </li>
-        <li className='col-span-2'>
-          <div className='flex flex-col gap-y-3'>
-            <h5 className='text-left'>{product?.full_name}</h5>
-            <StarRating stars={product.stars} />
-            <Specs product={product} />
-          </div>
-        </li>
-        <li className='col-span-1'>
-          <ProductBuyBox product={product} />
-        </li>
-      </ul>
-      <Carousel product={product} similarProducts={similarProducts} />
+    <div className='min-h-screen dark:bg-secondary-bg flex flex-col gap-16'>
+      <div className='container pb-2'>
+        <ul className='xl:grid xl:grid-cols-4 xl:gap-4 flex flex-col gap-8 pt-8'>
+          <li className='flex flex-col justify-start items-center col-span-1 relative'>
+            {/* <Image src={product.img || ''} alt='product' className='object-contain' width={325} height={150} /> */}
+            <Image src={'/no-image.png'} alt='product' className='object-contain' width={325} height={150} />
+          </li>
+          <li className='col-span-2'>
+            <div className='flex flex-col gap-y-3'>
+              <h5 className='text-left'>{product?.full_name}</h5>
+              <StarRating stars={product.stars} />
+              <Specs product={product} />
+            </div>
+          </li>
+          <li className='col-span-1'>
+            <ProductBuyBox product={product} />
+          </li>
+        </ul>
+        <Carousel product={product} similarProducts={similarProducts} />
+      </div>
     </div>
   )
 }

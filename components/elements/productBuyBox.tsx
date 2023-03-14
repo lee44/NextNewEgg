@@ -1,12 +1,13 @@
 import React from 'react'
-import { ProductListingProps } from '../../pages/product/[id]'
+import { ProductListingProps } from '../../types/product'
+import Box from '../templates/box'
 import Button from '../templates/button'
 
 const ProductBuyBox = ({ product }: ProductListingProps) => {
   const discountedPrice = product.price * product.discount
 
   return (
-    <div className='bg-tertiary-bg p-4'>
+    <Box additionalClasses={'my-0'}>
       <ul>
         <li className='flex justify-center'>Sold and Shipped by {product.shipped_by}</li>
         <hr />
@@ -18,7 +19,7 @@ const ProductBuyBox = ({ product }: ProductListingProps) => {
           <Button text={'Add to Cart'} url={''} onClick={() => {}} />
         </li>
       </ul>
-    </div>
+    </Box>
   )
 }
 

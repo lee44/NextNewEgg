@@ -1,7 +1,7 @@
 import { Product } from '@prisma/client'
 import Link from 'next/link'
 import React from 'react'
-import { Products } from '../../../types/products'
+import { Products } from '../../../types/product'
 import Card from '../../templates/card'
 
 type ListingsProps = {

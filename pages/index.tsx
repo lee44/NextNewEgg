@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Listings from '../components/layouts/listings/listings'
 import Nav from '../components/layouts/nav/nav'
 import prisma from '../prisma/lib/prisma'
-import { Products } from '../types/products'
+import { Products } from '../types/product'
 
 type HomeProps = {
   products: Products[]

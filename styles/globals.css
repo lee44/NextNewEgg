@@ -35,7 +35,6 @@
   h6 {
     @apply text-lg;
     @apply text-center;
-    @apply my-4;
   }
 
   p {
