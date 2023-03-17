@@ -4,6 +4,8 @@ import { SessionProvider } from 'next-auth/react'
 import { NextComponentType } from 'next'
 import Auth from '../components/layouts/auth/auth'
 import NoAuth from '../components/layouts/noauth/noauth'
+import { useEffect } from 'react'
+import { ThemeContextProvider } from '../store/theme'
 
 type CustomAppProps = AppProps & {
   Component: NextComponentType & { auth?: boolean } // add auth type
@@ -17,15 +19,17 @@ function MyApp({ Component, pageProps }: CustomAppProps) {
       // Disable Re-fetches session when window is focused
       // refetchOnWindowFocus={false}
     >
-      {Component.auth ? (
-        <Auth>
-          <Component {...pageProps} />
-        </Auth>
-      ) : (
-        <NoAuth>
-          <Component {...pageProps} />
-        </NoAuth>
-      )}
+      <ThemeContextProvider>
+        {Component.auth ? (
+          <Auth>
+            <Component {...pageProps} />
+          </Auth>
+        ) : (
+          <NoAuth>
+            <Component {...pageProps} />
+          </NoAuth>
+        )}
+      </ThemeContextProvider>
     </SessionProvider>
   )
 }

@@ -7,7 +7,7 @@ const Links = ({ href, icon, label }: { href: string; icon: IconType; label: str
   return (
     <Link href={href} className='p-2 rounded-lg hover:bg-button-hover'>
       <>
-        {icon}
+        {/* {icon} */}
         {label}
       </>
     </Link>
