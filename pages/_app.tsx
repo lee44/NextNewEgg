@@ -5,7 +5,7 @@ import { NextComponentType } from 'next'
 import Auth from '../components/layouts/auth/auth'
 import NoAuth from '../components/layouts/noauth/noauth'
 import { useEffect } from 'react'
-import { ThemeContextProvider } from '../store/theme'
+import { ThemeContextProvider } from '../store/themeContext'
 
 type CustomAppProps = AppProps & {
   Component: NextComponentType & { auth?: boolean } // add auth type

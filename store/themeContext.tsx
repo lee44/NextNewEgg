@@ -13,7 +13,7 @@ interface ThemePropsInterface {
   children?: JSX.Element | Array<JSX.Element>
 }
 
-export function ThemeContextProvider(props: ThemePropsInterface): ReactElement {
+export const ThemeContextProvider = (props: ThemePropsInterface) => {
   const [isDarkTheme, setIsDarkTheme] = useState(true)
   useEffect(() => initialThemeHandler())
 
