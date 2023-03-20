@@ -1,9 +1,13 @@
-import { createContext, ReactElement, useEffect, useState } from 'react'
+import { createContext, ReactElement, useContext, useEffect, useState } from 'react'
 
 const ThemeContext = createContext({
   isDarkTheme: true,
   toggleThemeHandler: () => {},
 })
+
+export const useThemeContext = () => {
+  return useContext(ThemeContext)
+}
 
 interface ThemePropsInterface {
   children?: JSX.Element | Array<JSX.Element>
@@ -46,7 +50,7 @@ export function ThemeContextProvider(props: ThemePropsInterface): ReactElement {
     localStorage.setItem('isDarkTheme', `${!isDarkTheme}`)
   }
 
-  return <ThemeContext.Provider value={{ isDarkTheme: true, toggleThemeHandler }}>{props.children}</ThemeContext.Provider>
+  return <ThemeContext.Provider value={{ isDarkTheme: isDarkTheme, toggleThemeHandler }}>{props.children}</ThemeContext.Provider>
 }
 
 export default ThemeContext
