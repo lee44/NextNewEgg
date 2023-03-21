@@ -11,12 +11,12 @@ import { ProductListingProps } from '../../types/product'
 
 const ProductListing = ({ product, similarProducts }: ProductListingProps) => {
   return (
-    <div className='min-h-screen dark:bg-secondary-bg flex flex-col gap-16'>
+    <div className='flex flex-col min-h-screen gap-16 dark:bg-secondary-bg'>
       <div className='container pb-2'>
-        <ul className='xl:grid xl:grid-cols-4 xl:gap-4 flex flex-col gap-8 pt-8'>
-          <li className='flex flex-col justify-start items-center xl:col-span-1 relative'>
-            {/* <Image src={product.img || ''} alt='product' className='object-contain' width={325} height={150} /> */}
-            <Image src={'/no-image.png'} alt='product' className='object-contain' width={325} height={150} />
+        <ul className='flex flex-col gap-8 pt-8 xl:grid xl:grid-cols-4 xl:gap-4'>
+          <li className='relative flex flex-col items-center justify-start xl:col-span-1'>
+            <Image src={product.img || ''} alt='product' className='object-contain' width={325} height={150} />
+            {/* <Image src={'/no-image.png'} alt='product' className='object-contain' width={325} height={150} /> */}
           </li>
           <li className='xl:col-span-2'>
             <div className='flex flex-col gap-y-3'>
@@ -29,7 +29,7 @@ const ProductListing = ({ product, similarProducts }: ProductListingProps) => {
             <ProductBuyBox product={product} />
           </li>
         </ul>
-        <h4 className='uppercase text-start mt-16'>Products related to this item</h4>
+        <h4 className='mt-16 uppercase text-start'>Products related to this item</h4>
         <Carousel product={product} similarProducts={similarProducts} />
       </div>
     </div>

@@ -8,10 +8,15 @@ const SimilarProduct = ({ product }: ProductBase) => {
   return (
     <Link href={`/product/${product.productId}`}>
       <div className='flex flex-col items-center gap-3 w-[200px]'>
-        {/* <Image src={product?.img ?? ''} alt='product' className='object-contain' fill /> */}
-        <Image src={'/no-image.png'} alt='product' className='object-contain' width={150} height={150} />
+        <Image
+          src={product?.img ?? '/no-image.png'}
+          alt='product'
+          className='max-h-[75px] min-h-[75px] object-contain'
+          width={75}
+          height={75}
+        />
         <StarRating stars={product.stars} />
-        <h6>{product.name}</h6>
+        <h6 className='max-w-[200px] whitespace-nowrap	overflow-hidden text-ellipsis dark:text-white'>{product.name}</h6>
       </div>
     </Link>
   )

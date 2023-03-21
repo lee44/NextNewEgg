@@ -27,10 +27,10 @@ const Carousel = ({ product, similarProducts }: ProductListingProps) => {
       <div className='relative'>
         <AiOutlineLeft
           onClick={handlePrevSlide}
-          className='absolute left-0 m-auto text-5xl inset-y-1/2 cursor-pointer text-gray-400 z-20'
+          className='absolute left-0 z-20 m-auto text-5xl text-gray-400 cursor-pointer inset-y-1/2 hover:text-white hover:bg-button-hover hover:rounded-full'
         />
-        <div className='w-full flex overflow-hidden relative m-auto'>
-          <Swipe onSwipeLeft={handleNextSlide} onSwipeRight={handlePrevSlide} className='relative z-10 w-full h-full flex justify-center'>
+        <div className='relative flex w-full m-auto overflow-hidden'>
+          <Swipe onSwipeLeft={handleNextSlide} onSwipeRight={handlePrevSlide} className='relative z-10 flex justify-center w-full h-full'>
             {similarProducts?.map((product, index) => {
               if (Math.floor(index / productsPerSlide) === currentSlide) {
                 return <SimilarProduct key={index} product={product} />
@@ -40,7 +40,7 @@ const Carousel = ({ product, similarProducts }: ProductListingProps) => {
         </div>
         <AiOutlineRight
           onClick={handleNextSlide}
-          className='absolute right-0 m-auto text-5xl inset-y-1/2 cursor-pointer text-gray-400 z-20'
+          className='absolute right-0 z-20 m-auto text-5xl text-gray-400 cursor-pointer inset-y-1/2 hover:text-white hover:bg-button-hover hover:rounded-full'
         />
 
         {/* <div className='relative flex justify-center p-2 mt-8'>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ProductListingProps } from '../../pages/product/[id]'
+import { ProductListingProps } from '../../types/product'
 
 // type SpecsProps = {
 //   specs: PowerSupply | CaseFan | RAM | Mouse | Keyboard | CPUFan | Case | Storage | GPU | Motherboard | CPU | {}
@@ -21,10 +21,14 @@ const Specs = ({ product }: ProductListingProps) => {
     {}
 
   return (
-    <ul className='list-disc ml-4'>
+    <ul className='ml-4 list-disc'>
       {Object.entries(specs).map((spec, index) => {
         if (!['id', 'productId'].includes(spec[0])) {
-          return <li key={index}>{spec[0] + ': ' + spec[1]}</li>
+          return (
+            <li className='dark:text-white' key={index}>
+              {spec[0] + ': ' + spec[1]}
+            </li>
+          )
         }
       })}
     </ul>
