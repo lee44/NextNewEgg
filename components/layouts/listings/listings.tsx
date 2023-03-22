@@ -15,7 +15,7 @@ const Listings = ({ products }: ListingsProps) => {
         Object.keys(category).map((categoryKey, index) => (
           <div key={index} className='mb-16'>
             <h3 className='mt-0'>{categoryKey}</h3>
-            <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3	gap-4 auto-rows-fr'>
+            <ul className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr'>
               {category[categoryKey].map((product, index) => {
                 return (
                   <li key={index}>

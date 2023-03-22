@@ -4,9 +4,8 @@ import Nav from '../nav/nav'
 
 const NoAuth = (props: { children: JSX.Element }) => {
   const { pathname } = useRouter()
-  const noNav = ['/auth/signin', '/auth/signup', '/auth/error', '/admin/dashboard']
-
-  const showNav = noNav.includes(pathname) ? false : true
+  const noNav = ['/auth', '/admin']
+  const showNav = !noNav.some((path) => pathname.includes(path))
 
   return (
     <>

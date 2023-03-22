@@ -9,7 +9,7 @@ type Card = {
 
 const Card = ({ product }: Card) => {
   return (
-    <div className='grid grid-cols-2 bg-[#ECF1FE] dark:bg-card-bg rounded-md md:p-5 p-4 h-full'>
+    <div className='grid grid-cols-2 bg-[#ECF1FE] dark:bg-card-bg rounded-md md:p-5 p-4 h-full gap-x-2'>
       <ul className='flex flex-col justify-center gap-y-2'>
         <StarRating stars={product.stars || 0} />
         <li className='flex flex-col justify-center h-20'>
@@ -22,11 +22,11 @@ const Card = ({ product }: Card) => {
           <p className='h-6 m-0 italic text-left'>{product.free_shipping ? 'FREE SHIPPING' : ''}</p>
         </li>
       </ul>
-      <div className='relative h-full'>
+      <div className='relative'>
         <Image
           src={product.img || ''}
           alt='product'
-          className='object-contain'
+          className='object-contain xl:object-fill '
           fill
           sizes='max-width: 768px) 100vw,
               (max-width: 1024px) 50vw,

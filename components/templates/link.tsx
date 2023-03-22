@@ -5,10 +5,11 @@ import { IconType } from 'react-icons/lib'
 
 const Links = ({ href, icon, label }: { href: string; icon: JSX.Element; label: string }) => {
   return (
-    <Link href={href} className='p-2 rounded-lg text-white hover:bg-button-hover'>
-      <>
-        {icon} {label}
-      </>
+    <Link href={href} className='p-2 text-white rounded-lg hover:bg-button-hover'>
+      <div className='flex items-center gap-3'>
+        {icon}
+        {label}
+      </div>
     </Link>
   )
 }
