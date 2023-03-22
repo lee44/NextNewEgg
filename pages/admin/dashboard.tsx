@@ -9,7 +9,7 @@ import { authOptions } from '../api/auth/[...nextauth]'
 
 const Dashboard = () => {
   return (
-    <div className='grid grid-cols-6 p-4 gap-16 min-h-screen'>
+    <div className='grid min-h-screen grid-cols-5 gap-16 p-4'>
       <SideBar />
       <Overview />
     </div>
