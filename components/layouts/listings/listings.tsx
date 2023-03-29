@@ -2,7 +2,7 @@ import { Product } from '@prisma/client'
 import Link from 'next/link'
 import React from 'react'
 import { Products } from '../../../types/product'
-import Card from '../../templates/card'
+import ProductCard from '../../elements/productCard'
 
 type ListingsProps = {
   products: Products[]
@@ -20,7 +20,7 @@ const Listings = ({ products }: ListingsProps) => {
                 return (
                   <li key={index}>
                     <Link href={`/product/${product.productId}`}>
-                      <Card product={product} />
+                      <ProductCard product={product} />
                     </Link>
                   </li>
                 )
