@@ -3,7 +3,7 @@ import Swipe from 'react-easy-swipe'
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai'
 import { ProductListingProps } from '../../types/product'
 import Box from './box'
-import SimilarProduct from '../elements/similarProduct'
+import SimilarProduct from '../product/similarProduct'
 import useWindowDimensions from '../../hooks/useWindowDimensions'
 
 const Carousel = ({ product, similarProducts }: ProductListingProps) => {

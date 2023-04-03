@@ -1,6 +1,6 @@
 import React from 'react'
-import DarkModeToggler from '../../elements/darkmodetoggler'
-import SignInOut from '../../elements/signinout'
+import DarkModeToggler from './darkmodetoggler'
+import SignInOut from './signinout'
 
 const Nav = () => {
   return (

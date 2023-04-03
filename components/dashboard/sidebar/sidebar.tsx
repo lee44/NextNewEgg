@@ -1,6 +1,6 @@
 import React from 'react'
-import { sidebarDashboardItems } from '../../../config/sidebarDashboardItems'
-import IconLink from '../../elements/iconLink'
+import { sidebarDashboardItems } from '../../../constants/sidebarDashboardItems'
+import IconLink from '../../ui/iconLink'
 
 const SideBar = () => {
   return (

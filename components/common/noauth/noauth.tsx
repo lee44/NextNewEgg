@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import React from 'react'
-import Nav from '../nav/nav'
+import Nav from '../navBar/nav'
 
 const NoAuth = (props: { children: JSX.Element }) => {
   const { pathname } = useRouter()

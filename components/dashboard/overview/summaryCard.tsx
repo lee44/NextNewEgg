@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from '../templates/card'
+import Card from '../../templates/card'
 
 const SummaryCard = ({ title, icon, count }: { title: string; icon: JSX.Element; count: string }) => {
   return (

@@ -2,7 +2,7 @@ import { Product } from '@prisma/client'
 import Image from 'next/image'
 import React, { ReactComponentElement } from 'react'
 import Card from '../templates/card'
-import StarRating from './starrating'
+import StarRating from '../ui/starRating'
 
 type ProductCard = {
   product: Product

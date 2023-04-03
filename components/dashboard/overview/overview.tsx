@@ -1,8 +1,8 @@
 import React from 'react'
 import { SlGraph } from 'react-icons/sl'
-import SummaryCard from '../../elements/summaryCard'
+import SummaryCard from './summaryCard'
 import { DashboardType } from '../../../types/dashboard'
-import { getOverViewItems } from '../../../config/overViewItems'
+import { getOverViewItems } from '../../../constants/overViewItems'
 
 const Overview = (props: DashboardType) => {
   const overViewItems = getOverViewItems(props)

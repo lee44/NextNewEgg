@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { DarkModeSwitch } from 'react-toggle-dark-mode'
-import { useThemeContext } from '../../store/themeContext'
+import { useThemeContext } from '../../../store/themeContext'
 
 const DarkModeToggler = () => {
   const themeCtx = useThemeContext()
