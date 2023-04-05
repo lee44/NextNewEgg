@@ -20,7 +20,7 @@ const Dashboard = (props: DashboardType) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const users = serialize(await prisma.user.findMany())
+  const users = await prisma.user.findMany()
   const products = await prisma.product.count()
   const sessions = await prisma.session.count()
   const carts = await prisma.cart.count()
