@@ -1,9 +1,5 @@
 import { IconType } from 'react-icons'
-import { MdSpaceDashboard } from 'react-icons/md'
-import { AiOutlineUser } from 'react-icons/ai'
-import { HiComputerDesktop } from 'react-icons/hi2'
-import { FaUsers, FaCartArrowDown } from 'react-icons/fa'
-import { BsTools } from 'react-icons/bs'
+import { ProjectIcons } from './projectIcons'
 
 type SideBarDashboardItem = {
   href: string
@@ -14,17 +10,17 @@ type SideBarDashboardItem = {
 export const sidebarDashboardItems: SideBarDashboardItem[] = [
   {
     href: '/dashboard',
-    icon: MdSpaceDashboard,
+    icon: ProjectIcons.dashboard,
     label: 'Dashboard',
   },
   {
     href: '/admin/users',
-    icon: FaUsers,
+    icon: ProjectIcons.users,
     label: 'Users',
   },
   {
     href: '/admin/products',
-    icon: BsTools,
+    icon: ProjectIcons.products,
     label: 'Products',
   },
 ]

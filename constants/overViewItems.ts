@@ -1,9 +1,7 @@
 import { IconType } from 'react-icons'
 import { DashboardType } from '../types/dashboard'
-import { FaUsers, FaCartArrowDown } from 'react-icons/fa'
-import { MdOutlineComputer } from 'react-icons/md'
-import { AiOutlineShoppingCart } from 'react-icons/ai'
 import { BsTools } from 'react-icons/bs'
+import { ProjectIcons } from './projectIcons'
 
 type OverViewItems = {
   title: string
@@ -16,31 +14,31 @@ export const getOverViewItems = (props: DashboardType): OverViewItems[] => {
   return [
     {
       title: 'Users',
-      icon: FaUsers,
+      icon: ProjectIcons.users,
       count: props.users.length,
       color: 'yellow',
     },
     {
       title: 'Products',
-      icon: BsTools,
+      icon: ProjectIcons.products,
       count: props.products,
       color: 'green',
     },
     {
       title: 'Sessions',
-      icon: MdOutlineComputer,
+      icon: ProjectIcons.session,
       count: props.sessions,
       color: 'white	',
     },
     {
       title: 'Cart',
-      icon: AiOutlineShoppingCart,
+      icon: ProjectIcons.cart,
       count: props.carts,
       color: 'orange',
     },
     {
       title: 'Cart Items',
-      icon: FaCartArrowDown,
+      icon: ProjectIcons.cartItems,
       count: props.cartItems,
       color: 'red',
     },

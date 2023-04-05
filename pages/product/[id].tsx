@@ -36,15 +36,11 @@ const ProductListing = ({ product, similarProducts }: ProductListingProps) => {
   )
 }
 
-interface ProductListingParams extends ParsedUrlQuery {
-  id: string
-}
-
 export const getStaticProps: GetStaticProps = async (context) => {
-  const { id } = context.params as ProductListingParams
+  const { id } = context.params as ParsedUrlQuery
 
   const product = await prisma.product.findFirst({
-    where: { productId: id },
+    where: { productId: id as string},
     include: {
       CPUSpecs: true,
       PowerSupplySpecs: true,
