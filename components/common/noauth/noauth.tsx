@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import React from 'react'
+import SideBar from '../../dashboard/sidebar/sidebar'
 import Nav from '../navBar/nav'
 
 const NoAuth = (props: { children: JSX.Element }) => {
@@ -10,6 +11,7 @@ const NoAuth = (props: { children: JSX.Element }) => {
   return (
     <>
       {showNav && <Nav />}
+      {!showNav && <SideBar />}
       <div className={`${showNav && 'mt-20'}`}>{props.children}</div>
     </>
   )
