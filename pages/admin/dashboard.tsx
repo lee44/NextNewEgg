@@ -13,6 +13,7 @@ import { serialize } from '../../utils/serialize'
 const Dashboard = (props: DashboardType) => {
   return (
     <div className='grid min-h-screen min-w-[768px] grid-cols-6 p-4 gap-x-8'>
+      <SideBar />
       <Overview {...props} />
     </div>
   )
