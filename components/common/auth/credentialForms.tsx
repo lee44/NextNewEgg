@@ -45,39 +45,39 @@ const CredentialForms = ({ formType, fields, csrfToken }: CredentialForms) => {
           <form>
             <div className='flex flex-col items-center justify-center py-2'>
               <input name='csrfToken' type='hidden' defaultValue={csrfToken} />
-              <div className='text-red-400 text-md text-center rounded p-2'>{error}</div>
+              <div className='p-2 text-center text-red-400 rounded text-md'>{error}</div>
 
               {fields.map((field, index) => {
                 let lowerCaseField = field.split(' ').join('').toLowerCase()
 
                 return (
                   <div className='w-full mb-6' key={index}>
-                    <label htmlFor={lowerCaseField} className='uppercase text-sm font-bold'>
+                    <label htmlFor={lowerCaseField} className='text-sm font-bold text-white uppercase'>
                       {field}
                       <Field
                         name={lowerCaseField}
                         aria-label={`enter your ${lowerCaseField}`}
                         aria-required='true'
                         type='text'
-                        className='w-full text-gray-900 mt-2 p-3'
+                        className='w-full p-3 mt-2 text-gray-900'
                       />
                     </label>
-                    <div className='text-red-600 text-sm'>
+                    <div className='text-sm text-red-600'>
                       <ErrorMessage name={lowerCaseField} />
                     </div>
                   </div>
                 )
               })}
-              <div className='w-full flex flex-col items-center justify-center'>
+              <div className='flex flex-col items-center justify-center w-full'>
                 <button
-                  className='bg-button hover:bg-button-hover p-3 rounded-md w-full font-bold text-lg'
+                  className='w-full p-3 text-lg font-bold text-white rounded-md bg-button hover:bg-button-hover'
                   type='button'
                   onClick={formik.submitForm}
                 >
                   {formik.isSubmitting ? 'Please wait...' : `${formType}`}
                 </button>
                 <div className='p-3'>
-                  <span>
+                  <span className='text-white'>
                     {formType === 'Sign In' ? 'New to NextNewegg? ' : 'Have an account? '}
                     <Link className='text-lg text-blue-500 hover:underline' href={formType === 'Sign In' ? '/auth/signup' : '/auth/signin'}>
                       {formType === 'Sign In' ? 'Sign Up' : 'Sign In'}
