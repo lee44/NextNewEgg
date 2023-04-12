@@ -9,7 +9,7 @@ type SideBarDashboardItem = {
 
 export const sidebarDashboardItems: SideBarDashboardItem[] = [
   {
-    href: '/dashboard',
+    href: '/admin/dashboard',
     icon: ProjectIcons.dashboard,
     label: 'Dashboard',
   },
