@@ -8,7 +8,7 @@ const Auth = (props: { children: JSX.Element }) => {
     return <div>Loading...</div>
   }
 
-  return props.children
+  return <div className='min-h-screen bg-primary-bg'>{props.children}</div>
 }
 
 export default Auth

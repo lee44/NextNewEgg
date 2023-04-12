@@ -11,7 +11,7 @@ const NoAuth = (props: { children: JSX.Element }) => {
   return (
     <>
       {showNav && <Nav />}
-      <div className={`${showNav && 'mt-20'}`}>{props.children}</div>
+      <div className={`${showNav && 'mt-20'} min-h-screen bg-primary-bg`}>{props.children}</div>
     </>
   )
 }

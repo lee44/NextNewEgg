@@ -5,39 +5,52 @@ import { serialize } from '../../utils/serialize'
 import prisma from '../../prisma/lib/prisma'
 import { Product, User } from '@prisma/client'
 import { ParsedUrlQuery } from 'querystring'
+import Pagination from '../../components/templates/pagination'
 
 export type DataProp = {
+  pages?: number
   data: User[] | Product[]
   type: string
 }
 
-export interface DataQuery {}
+export type QueryProp = {
+  page: string | '1'
+  type?: string
+}
 
 const Data = (prop: DataProp) => {
   return (
-    <div className=''>
+    <div className='flex flex-col items-center gap-6'>
       <Table data={prop.data} type={prop.type.charAt(0).toUpperCase() + prop.type.slice(1)} />
+      <Pagination pages={prop.pages ?? 0} type={prop.type} />
     </div>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { type } = context.query
-  let data
+  const { type, page } = context.query as QueryProp
+  let data, count, skip
+
+  skip = Math.abs((parseInt(page) - 1) * 10)
 
   switch (type) {
     case 'users':
-      data = serialize(await prisma.user.findMany())
+      count = await prisma.user.count()
+      data = serialize(await prisma.user.findMany({ skip: skip, take: 10 }))
       break
     case 'products':
-      data = serialize(await prisma.product.findMany())
+      count = await prisma.product.count()
+      data = serialize(await prisma.product.findMany({ skip: skip, take: 10 }))
       break
     default:
-      data = serialize(await prisma.user.findMany())
+      count = await prisma.user.count()
+      data = serialize(await prisma.user.findMany({ skip: skip, take: 10 }))
   }
 
+  const pages = Math.ceil(count / 10)
+
   return {
-    props: { data: data, type: type },
+    props: { pages: pages, data: data, type: type },
   }
 }
 
