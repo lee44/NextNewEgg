@@ -7,7 +7,7 @@ const Pagination = ({ pages, type }: { pages: number; type: string }) => {
   const router = useRouter()
   const { page } = router.query as QueryProp
 
-  let parseIntPage = parseInt(page) !== 0 ? parseInt(page) : 1
+  let parseIntPage = parseInt(page ?? '1') !== 0 ? parseInt(page ?? '1') : 1
 
   const getButtons = () => {
     let buttons = []

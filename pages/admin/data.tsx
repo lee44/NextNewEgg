@@ -14,7 +14,7 @@ export type DataProp = {
 }
 
 export type QueryProp = {
-  page: string | '1'
+  page?: string
   type?: string
 }
 
@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { type, page } = context.query as QueryProp
   let data, count, skip
 
-  skip = Math.abs((parseInt(page) - 1) * 10)
+  skip = (parseInt(page ?? '1') - 1) * 10
 
   switch (type) {
     case 'users':
@@ -53,5 +53,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: { pages: pages, data: data, type: type },
   }
 }
+
+Data.auth = true
 
 export default Data

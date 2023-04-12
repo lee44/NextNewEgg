@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router'
 import React from 'react'
-import SideBar from '../../dashboard/sidebar/sidebar'
+import SideBar from '../../dashboard/sidebar/menuSideBar'
 import Nav from '../navBar/nav'
 
 const NoAuth = (props: { children: JSX.Element }) => {
   const { pathname } = useRouter()
-  const noNav = ['/auth', '/admin']
+  const noNav = ['/auth']
   const showNav = !noNav.some((path) => pathname.includes(path))
 
   return (

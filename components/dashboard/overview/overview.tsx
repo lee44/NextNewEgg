@@ -12,7 +12,7 @@ const Overview = (props: DashboardType) => {
   const overViewItems = getOverViewItems(props)
 
   return (
-    <div className='col-span-4 px-4 lg:col-span-5'>
+    <>
       <SectionHeading Icon={ProjectIcons.overview} heading='Overview' />
       <ul className='grid grid-cols-2 gap-4 gap-x-8 lg:grid-cols-3 xl:grid-cols-4'>
         {overViewItems.map((overViewItem, index) => {
@@ -39,7 +39,7 @@ const Overview = (props: DashboardType) => {
           )
         })}
       </ul>
-    </div>
+    </>
   )
 }
 

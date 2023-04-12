@@ -4,19 +4,14 @@ import { getServerSession } from 'next-auth/next'
 import { getSession, useSession } from 'next-auth/react'
 import React, { useEffect } from 'react'
 import Overview from '../../components/dashboard/overview/overview'
-import SideBar from '../../components/dashboard/sidebar/sidebar'
+import SideBar from '../../components/dashboard/sidebar/menuSideBar'
 import { authOptions } from '../api/auth/[...nextauth]'
 import prisma from '../../prisma/lib/prisma'
 import { DashboardType } from '../../types/dashboard'
 import { serialize } from '../../utils/serialize'
 
 const Dashboard = (props: DashboardType) => {
-  return (
-    <div className='grid min-h-screen min-w-[768px] grid-cols-6 p-4 gap-x-8'>
-      <SideBar />
-      <Overview {...props} />
-    </div>
-  )
+  return <Overview {...props} />
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -31,6 +26,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 }
 
-//Dashboard.auth = true
+Dashboard.auth = true
 
 export default Dashboard
