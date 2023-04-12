@@ -14,12 +14,12 @@ export const sidebarDashboardItems: SideBarDashboardItem[] = [
     label: 'Dashboard',
   },
   {
-    href: '/admin/users',
+    href: '/admin/data?type=users',
     icon: ProjectIcons.users,
     label: 'Users',
   },
   {
-    href: '/admin/products',
+    href: '/admin/data?type=products',
     icon: ProjectIcons.products,
     label: 'Products',
   },

@@ -2,12 +2,13 @@ import React from 'react'
 import SectionHeading from '../dashboard/overview/sectionHeading'
 import { BsTable } from 'react-icons/bs'
 import { Product, User } from '@prisma/client'
+import { DataProp } from '../../pages/admin/data'
 
-const Table = ({ data }: { data: User[] | Product[] }) => {
-  const keys = Object.keys(data[0])
+const Table = ( prop : DataProp) => {
+  const keys = Object.keys(prop.data[0])
   return (
     <div className='container flex flex-col min-h-screen'>
-      <SectionHeading Icon={BsTable} heading={'Users'} />
+      <SectionHeading Icon={BsTable} heading={prop.type} />
       <table className='block w-full overflow-x-scroll font-light text-left text-white rounded-md table-auto ext-sm overflow-x'>
         <thead className='font-medium bg-white border-b dark:border-neutral-500 dark:bg-neutral-600'>
           <tr>
@@ -21,7 +22,7 @@ const Table = ({ data }: { data: User[] | Product[] }) => {
           </tr>
         </thead>
         <tbody>
-          {data.map((record, index) => {
+          {prop.data.map((record, index) => {
             return (
               <tr key={index} className='border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700'>
                 {Object.values(record).map((value, index) => {
