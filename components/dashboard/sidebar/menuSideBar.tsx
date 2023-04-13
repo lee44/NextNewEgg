@@ -2,6 +2,7 @@ import React from 'react'
 import { sidebarDashboardItems } from '../../../constants/sidebarDashboardItems'
 import IconLink from '../../ui/iconLink'
 import { useRouter } from 'next/router'
+import { FaArrowCircleLeft } from 'react-icons/fa'
 
 const MenuSideBar = () => {
   const { pathname, query } = useRouter()
@@ -14,7 +15,7 @@ const MenuSideBar = () => {
           <IconLink
             key={index}
             href={item.href}
-            icon={<item.icon className='min-w-[30px]' />}
+            icon={<item.icon size={20} />}
             label={item.label}
             additionalClasses={
               pathname.includes(item.href) || item.href.includes(query.type as string)
@@ -24,6 +25,11 @@ const MenuSideBar = () => {
           />
         )
       })}
+      <div className='items-end'>
+        <div className='flex justify-center'>
+          <FaArrowCircleLeft color='white' size={30} />
+        </div>
+      </div>
     </div>
   )
 }
