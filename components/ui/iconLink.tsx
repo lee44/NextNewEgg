@@ -15,8 +15,8 @@ const IconLink = ({
   additionalClasses?: string
 }) => {
   return (
-    <Link href={href} className={`p-2 text-white rounded-lg hover:bg-button-hover ${additionalClasses}`}>
-      <div className='flex items-center gap-2'>
+    <Link href={href} className={`text-white rounded-lg hover:bg-button-hover ${additionalClasses}`}>
+      <div className='flex items-center gap-2 p-2 '>
         {icon}
         {label}
       </div>

@@ -8,7 +8,7 @@ const MenuSideBar = () => {
   const { pathname, query } = useRouter()
 
   return (
-    <div className='flex-col min-h-full gap-4 p-4 rounded-lg bg-tertiary-bg'>
+    <div className='flex flex-col min-h-full gap-4 p-4 rounded-lg bg-tertiary-bg'>
       <h5 className='text-white'>SideBar</h5>
       {sidebarDashboardItems.map((item, index) => {
         return (
@@ -18,9 +18,7 @@ const MenuSideBar = () => {
             icon={<item.icon size={20} />}
             label={item.label}
             additionalClasses={
-              pathname.includes(item.href) || item.href.includes(query.type as string)
-                ? `text-button font-bold hover:bg-tertiary-bg pointer-events-none`
-                : ''
+              pathname.includes(item.href) || item.href.includes(query.type as string) ? `text-button font-bold pointer-events-none` : ''
             }
           />
         )

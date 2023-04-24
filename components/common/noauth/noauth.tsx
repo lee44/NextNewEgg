@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import React from 'react'
 import SideBar from '../../dashboard/sidebar/menuSideBar'
-import Nav from '../navBar/nav'
+import Nav from '../navbar/nav'
 
 const NoAuth = (props: { children: JSX.Element }) => {
   const { pathname } = useRouter()
