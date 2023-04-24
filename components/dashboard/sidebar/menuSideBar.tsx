@@ -8,7 +8,7 @@ const MenuSideBar = () => {
   const { pathname, query } = useRouter()
 
   return (
-    <div className='flex-col min-h-full gap-4 p-4 rounded-lg md:flex bg-tertiary-bg'>
+    <div className='flex-col min-h-full gap-4 p-4 rounded-lg bg-tertiary-bg'>
       <h5 className='text-white'>SideBar</h5>
       {sidebarDashboardItems.map((item, index) => {
         return (

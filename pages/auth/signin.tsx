@@ -2,7 +2,7 @@ import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSideP
 import { ClientSafeProvider, getCsrfToken, getProviders, getSession, signIn } from 'next-auth/react'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../api/auth/[...nextauth]'
-import ErrorMessage from '../../components/common/errorMessage'
+import ErrorMessage from '../../components/ui/errorMessage'
 import Image from 'next/image'
 import CredentialForms from '../../components/common/auth/credentialForms'
 import { errorMessage } from '../../types/errors'
@@ -19,7 +19,7 @@ const SignIn = ({ providers, error, csrfToken }: SignInProps) => {
 
   return (
     <>
-      <div className='h-screen flex items-center justify-center'>
+      <div className='flex items-center justify-center h-screen'>
         <div className='max-w-[400px] flex flex-col justify-center items-center gap-y-4 border-1 p-12 rounded-md bg-card-bg'>
           <Image src={'/icons/newegg.png'} alt='product' className='' width={135} height={115} priority />
           <h5 className=''>Sign In</h5>

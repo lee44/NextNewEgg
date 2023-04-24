@@ -10,11 +10,11 @@ const Auth = (props: { children: JSX.Element }) => {
   }
 
   return (
-    <div className='grid min-h-screen min-w-[768px] grid-cols-6 p-4 gap-x-4 bg-primary-bg'>
-      <div className='col-span-2 lg:col-span-1'>
+    <div className='grid min-h-screen grid-cols-6 p-4 gap-x-4 dark:bg-primary-bg'>
+      <div className='hidden col-span-2 lg:col-span-1 md:block max-w-[250px]'>
         <MenuSideBar />
       </div>
-      <div className='col-span-4 px-4 lg:col-span-5'>{props.children}</div>
+      <div className='col-span-6 px-4 md:col-span-4 lg:col-span-5'>{props.children}</div>
     </div>
   )
 }
