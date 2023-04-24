@@ -14,13 +14,13 @@ const Overview = (props: DashboardType) => {
   return (
     <>
       <SectionHeading Icon={ProjectIcons.overview} heading='Overview' />
-      <ul className='grid grid-cols-3 gap-4 mb-8 gap-x-8 lg:grid-cols-4 xl:grid-cols-5'>
+      <ul className='grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-4 md:gap-x-8 lg:grid-cols-3 xl:grid-cols-4'>
         {overViewItems.map((overViewItem, index) => {
           return (
             <li key={index} className=''>
               <SummaryCard
                 title={overViewItem.title}
-                icon={<overViewItem.icon color={overViewItem.color} size={50} />}
+                icon={<overViewItem.icon color={overViewItem.color} className='w-[35px] h-[35px] lg:w-[50px] lg:h-[50px]' />}
                 count={overViewItem.count?.toString()}
               />
             </li>
@@ -28,7 +28,7 @@ const Overview = (props: DashboardType) => {
         })}
       </ul>
       <SectionHeading Icon={ProjectIcons.users} heading='Users' />
-      <ul className='grid grid-cols-2 gap-4 gap-x-8 lg:grid-cols-3 xl:grid-cols-4'>
+      <ul className='grid grid-cols-1 gap-4 gap-x-8 lg:grid-cols-2 xl:grid-cols-3'>
         {props.users.map((user, index) => {
           return (
             <Link key={index} href={`user/${user.id}`}>

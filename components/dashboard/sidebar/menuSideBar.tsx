@@ -15,7 +15,7 @@ const MenuSideBar = () => {
           <IconLink
             key={index}
             href={item.href}
-            icon={<item.icon size={20} />}
+            icon={<item.icon size={20} className='min-w-[20px]' />}
             label={item.label}
             additionalClasses={
               pathname.includes(item.href) || item.href.includes(query.type as string) ? `text-button font-bold pointer-events-none` : ''
