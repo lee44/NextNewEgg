@@ -1,12 +1,12 @@
 import React from 'react'
 import SummaryCard from './summaryCard'
-import { DashboardType } from '../../../types/dashboard'
 import { getOverViewItems } from '../../../constants/overViewItems'
 import { FaUsers } from 'react-icons/fa'
 import UserCard from './userCard'
 import Link from 'next/link'
 import SectionHeading from './sectionHeading'
 import { ProjectIcons } from '../../../constants/projectIcons'
+import { DashboardType } from '../../../pages/admin/dashboard'
 
 const Overview = (props: DashboardType) => {
   const overViewItems = getOverViewItems(props)
@@ -14,7 +14,7 @@ const Overview = (props: DashboardType) => {
   return (
     <>
       <SectionHeading Icon={ProjectIcons.overview} heading='Overview' />
-      <ul className='grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-4 md:gap-x-8 lg:grid-cols-3 xl:grid-cols-4'>
+      <ul className='grid grid-cols-1 gap-2 mb-4 md:grid-cols-2 md:gap-4 md:gap-x-8 lg:grid-cols-3 xl:grid-cols-4'>
         {overViewItems.map((overViewItem, index) => {
           return (
             <li key={index} className=''>

@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { sidebarDashboardItems } from '../../../constants/sidebarDashboardItems'
 import IconLink from '../../ui/iconLink'
 import { useRouter } from 'next/router'
 import { FaArrowCircleLeft } from 'react-icons/fa'
 
-const MenuSideBar = () => {
+const MenuSideBar = ({ setSidebar }: { setSidebar: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const { pathname, query } = useRouter()
 
   return (
@@ -23,10 +23,15 @@ const MenuSideBar = () => {
           />
         )
       })}
-      <div className='items-end'>
-        <div className='flex justify-center'>
-          <FaArrowCircleLeft color='white' size={30} />
-        </div>
+      <div className='flex justify-center mt-auto'>
+        <FaArrowCircleLeft
+          color='white'
+          size={30}
+          className='cursor-pointer'
+          onClick={() => {
+            setSidebar((sidebar: boolean) => !sidebar)
+          }}
+        />
       </div>
     </div>
   )

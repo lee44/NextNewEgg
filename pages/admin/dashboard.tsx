@@ -1,21 +1,25 @@
 import { GetServerSideProps } from 'next'
-import { Session } from 'next-auth'
-import { getServerSession } from 'next-auth/next'
-import { getSession, useSession } from 'next-auth/react'
-import React, { useEffect } from 'react'
-import SideBar from '../../components/dashboard/sidebar/menuSideBar'
-import { authOptions } from '../api/auth/[...nextauth]'
+import React, { useState } from 'react'
 import prisma from '../../prisma/lib/prisma'
-import { DashboardType } from '../../types/dashboard'
+import { Product, User, Session as Sessions } from '@prisma/client'
 import { serialize } from '../../utils/serialize'
 import MenuSideBar from '../../components/dashboard/sidebar/menuSideBar'
 import Overview from '../../components/dashboard/overview/overview'
 
+export type DashboardType = {
+  users: User[]
+  products: number
+  sessions: number
+  carts: number
+  cartItems: number
+  setSidebar: React.Dispatch<React.SetStateAction<boolean>>
+}
+
 const Dashboard = (props: DashboardType) => {
   return (
     <div className='grid min-h-[calc(100vh-64px)] grid-cols-6 p-4 mt-16 gap-x-4 dark:bg-primary-bg'>
-      <div className='hidden col-span-2 lg:col-span-1 md:block'>
-        <MenuSideBar />
+      <div className={`col-span-2 lg:col-span-1 ${sideBar ? 'md:block' : 'hidden'}`}>
+        <MenuSideBar setSidebar={props.setSidebar} />
       </div>
       <div className='col-span-6 px-4 md:col-span-4 lg:col-span-5'>
         <Overview {...props} />

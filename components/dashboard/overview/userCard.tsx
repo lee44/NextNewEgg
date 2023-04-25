@@ -9,7 +9,7 @@ const UserCard = ({ user }: { user: User }) => {
   return (
     <Card>
       <div className='flex items-center justify-between gap-4'>
-        <RxAvatar color='' size={50} className='dark:fill-white' />
+        <RxAvatar size={50} className='dark:text-white' />
         <div>
           <h5 className='text-left'>{user.name}</h5>
           <p>{user.email}</p>

@@ -1,10 +1,11 @@
 import { useSession } from 'next-auth/react'
-import React from 'react'
+import React, { useState } from 'react'
 import DarkModeToggler from '../navbar/darkmodetoggler'
 import Nav from '../navbar/nav'
 
-const Auth = (props: { children: JSX.Element }) => {
+const Auth = ({ children }: { children: JSX.Element }) => {
   const { status } = useSession({ required: true })
+  const [sideBar, setSidebar] = useState(true)
 
   if (status === 'loading') {
     return <div>Loading...</div>
@@ -15,7 +16,7 @@ const Auth = (props: { children: JSX.Element }) => {
       <Nav>
         <DarkModeToggler />
       </Nav>
-      {props.children}
+      {children}
     </div>
   )
 }
