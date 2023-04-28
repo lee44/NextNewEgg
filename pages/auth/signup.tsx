@@ -1,9 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
-import CredentialForms from '../../components/common/auth/credentialForms'
 import { ClientSafeProvider, getCsrfToken, getProviders } from 'next-auth/react'
 import { GetServerSideProps } from 'next'
-import OauthButton from '../../components/ui/oAuthButton'
+import OauthButton from '../../components/ui/OAuthButton'
+import CredentialForms from '../../components/common/authentication/CredentialForms'
 
 type SignUpProps = {
   providers: ClientSafeProvider
@@ -14,7 +14,7 @@ type SignUpProps = {
 const SignUp = ({ providers, error, csrfToken }: SignUpProps) => {
   return (
     <>
-      <div className='h-screen flex items-center justify-center'>
+      <div className='flex items-center justify-center h-screen'>
         <div className='max-w-[400px] flex flex-col justify-center items-center gap-y-4 border-1 p-12 rounded-md bg-card-bg'>
           <Image src={'/icons/newegg.png'} alt='product' className='' width={135} height={115} priority />
           <h5 className=''>Sign Up</h5>

@@ -2,7 +2,7 @@ import { Product } from '@prisma/client'
 import Link from 'next/link'
 import React from 'react'
 import { Products } from '../../types/product'
-import ProductCard from './productCard'
+import ProductCard from './ProductCard'
 
 type ListingsProps = {
   products: Products[]

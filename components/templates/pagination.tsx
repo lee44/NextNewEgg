@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import React from 'react'
 import { QueryProp } from '../../pages/admin/data'
-import Button from './button'
+import Button from './Button'
 
 const Pagination = ({ pages, type }: { pages: number; type: string }) => {
   const router = useRouter()

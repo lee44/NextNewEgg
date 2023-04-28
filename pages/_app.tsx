@@ -2,10 +2,10 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
 import { NextComponentType } from 'next'
-import Auth from '../components/common/auth/auth'
-import NoAuth from '../components/common/noauth/noauth'
 import { useEffect } from 'react'
 import { ThemeContextProvider } from '../store/themeContext'
+import Authenticated from '../layouts/Authenticated'
+import Guest from '../layouts/Guest'
 
 type CustomAppProps = AppProps & {
   Component: NextComponentType & { auth?: boolean } // add auth type
@@ -21,13 +21,13 @@ function MyApp({ Component, pageProps }: CustomAppProps) {
     >
       <ThemeContextProvider>
         {Component.auth ? (
-          <Auth>
+          <Authenticated>
             <Component {...pageProps} />
-          </Auth>
+          </Authenticated>
         ) : (
-          <NoAuth>
+          <Guest>
             <Component {...pageProps} />
-          </NoAuth>
+          </Guest>
         )}
       </ThemeContextProvider>
     </SessionProvider>

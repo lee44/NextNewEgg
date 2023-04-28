@@ -1,5 +1,5 @@
 import React from 'react'
-import SectionHeading from '../dashboard/overview/sectionHeading'
+import SectionHeading from '../dashboard/overview/SectionHeading'
 import { BsTable } from 'react-icons/bs'
 import { Product, User } from '@prisma/client'
 import { DataProp } from '../../pages/admin/data'

@@ -2,11 +2,11 @@ import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSideP
 import { ClientSafeProvider, getCsrfToken, getProviders, getSession, signIn } from 'next-auth/react'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../api/auth/[...nextauth]'
-import ErrorMessage from '../../components/ui/errorMessage'
+import ErrorMessage from '../../components/ui/ErrorMessage'
 import Image from 'next/image'
-import CredentialForms from '../../components/common/auth/credentialForms'
 import { errorMessage } from '../../types/errors'
-import OauthButton from '../../components/ui/oAuthButton'
+import OauthButton from '../../components/ui/OAuthButton'
+import CredentialForms from '../../components/common/authentication/CredentialForms'
 
 type SignInProps = {
   providers: ClientSafeProvider

@@ -1,7 +1,7 @@
 import React from 'react'
 import { ProductListingProps } from '../../types/product'
-import Box from '../templates/box'
-import Button from '../templates/button'
+import Box from '../templates/Box'
+import Button from '../templates/Button'
 
 const ProductBuyBox = ({ product }: ProductListingProps) => {
   const discountedPrice = product.price ?? 0 * (product.discount ?? 0)

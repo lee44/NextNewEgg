@@ -2,14 +2,14 @@ import { User } from '@prisma/client'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import React from 'react'
-import SectionHeading from '../../../components/dashboard/overview/sectionHeading'
-import InputField from '../../../components/templates/inputField'
-import Card from '../../../components/templates/card'
+import SectionHeading from '../../../components/dashboard/overview/SectionHeading'
+import InputField from '../../../components/templates/InputField'
+import Card from '../../../components/templates/Card'
 import { ProjectIcons } from '../../../constants/projectIcons'
 import prisma from '../../../prisma/lib/prisma'
 import { serialize } from '../../../utils/serialize'
 import Image from 'next/image'
-import Button from '../../../components/templates/button'
+import Button from '../../../components/templates/Button'
 
 const UserListing = ({ user }: { user: User }) => {
   return (

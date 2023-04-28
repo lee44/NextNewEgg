@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 import prisma from '../../prisma/lib/prisma'
 import { Product, User, Session as Sessions } from '@prisma/client'
 import { serialize } from '../../utils/serialize'
-import MenuSideBar from '../../components/dashboard/sidebar/menuSideBar'
-import Overview from '../../components/dashboard/overview/overview'
+import MenuSideBar from '../../components/dashboard/aside/AsideMenu'
+import Overview from '../../layouts/Overview'
 
 export type DashboardType = {
   users: User[]
@@ -17,13 +17,8 @@ export type DashboardType = {
 
 const Dashboard = (props: DashboardType) => {
   return (
-    <div className='grid min-h-[calc(100vh-64px)] grid-cols-6 p-4 mt-16 gap-x-4 dark:bg-primary-bg'>
-      <div className={`col-span-2 lg:col-span-1 ${sideBar ? 'md:block' : 'hidden'}`}>
-        <MenuSideBar setSidebar={props.setSidebar} />
-      </div>
-      <div className='col-span-6 px-4 md:col-span-4 lg:col-span-5'>
-        <Overview {...props} />
-      </div>
+    <div className='min-h-[calc(100vh-64px)] p-4 mt-16 dark:bg-primary-bg'>
+      <Overview {...props} />
     </div>
   )
 }

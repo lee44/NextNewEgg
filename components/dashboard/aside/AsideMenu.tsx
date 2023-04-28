@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { sidebarDashboardItems } from '../../../constants/sidebarDashboardItems'
-import IconLink from '../../ui/iconLink'
+import IconLink from '../../ui/IconLink'
 import { useRouter } from 'next/router'
 import { FaArrowCircleLeft } from 'react-icons/fa'
 
-const MenuSideBar = ({ setSidebar }: { setSidebar: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const AsideMenu = ({ setSidebar }: { setSidebar: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const { pathname, query } = useRouter()
 
   return (
@@ -37,4 +37,4 @@ const MenuSideBar = ({ setSidebar }: { setSidebar: React.Dispatch<React.SetState
   )
 }
 
-export default MenuSideBar
+export default AsideMenu

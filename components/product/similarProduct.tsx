@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { ProductBase } from '../../types/product'
-import StarRating from '../ui/starRating'
+import StarRating from '../ui/StarRating'
 import Link from 'next/link'
 
 const SimilarProduct = ({ product }: ProductBase) => {

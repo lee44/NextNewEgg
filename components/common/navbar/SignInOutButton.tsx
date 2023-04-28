@@ -1,14 +1,14 @@
 import React from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
-import Button from '../../templates/button'
+import Button from '../../templates/Button'
 
-const SignInOut = () => {
+const SignInOutButton = () => {
   const { data: session } = useSession()
 
   if (session) {
     return (
       <>
-        Signed in as {session?.user?.name}
+        <span className='text-black dark:text-white'>Signed in as {session?.user?.name}</span>
         <Button text={'Sign Out'} url={''} onClick={() => signOut()} />
       </>
     )
@@ -20,4 +20,4 @@ const SignInOut = () => {
   )
 }
 
-export default SignInOut
+export default SignInOutButton

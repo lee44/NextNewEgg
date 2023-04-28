@@ -1,12 +1,12 @@
 import React from 'react'
-import SummaryCard from './summaryCard'
-import { getOverViewItems } from '../../../constants/overViewItems'
+import SummaryCard from '../components/dashboard/overview/SummaryCard'
+import { getOverViewItems } from '../constants/overViewItems'
 import { FaUsers } from 'react-icons/fa'
-import UserCard from './userCard'
+import UserCard from '../components/dashboard/overview/UserCard'
 import Link from 'next/link'
-import SectionHeading from './sectionHeading'
-import { ProjectIcons } from '../../../constants/projectIcons'
-import { DashboardType } from '../../../pages/admin/dashboard'
+import { ProjectIcons } from '../constants/projectIcons'
+import { DashboardType } from '../pages/admin/dashboard'
+import SectionHeading from '../components/dashboard/overview/SectionHeading'
 
 const Overview = (props: DashboardType) => {
   const overViewItems = getOverViewItems(props)

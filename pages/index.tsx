@@ -1,8 +1,8 @@
 import type { GetStaticProps, NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import Head from 'next/head'
-import Listings from '../components/product/productGrid'
-import Nav from '../components/common/navbar/nav'
+import Listings from '../components/product/ProductGrid'
+import Nav from '../components/common/navbar/navbar'
 import prisma from '../prisma/lib/prisma'
 import { Products } from '../types/product'
 

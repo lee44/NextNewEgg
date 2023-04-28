@@ -1,11 +1,11 @@
 import { GetServerSideProps } from 'next'
 import React from 'react'
-import Table from '../../components/templates/table'
+import Table from '../../components/templates/Table'
 import { serialize } from '../../utils/serialize'
 import prisma from '../../prisma/lib/prisma'
 import { Product, User } from '@prisma/client'
 import { ParsedUrlQuery } from 'querystring'
-import Pagination from '../../components/templates/pagination'
+import Pagination from '../../components/templates/Pagination'
 
 export type DataProp = {
   pages?: number

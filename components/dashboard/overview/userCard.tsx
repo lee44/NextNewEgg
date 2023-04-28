@@ -1,6 +1,6 @@
 import React from 'react'
 import { User } from '@prisma/client'
-import Card from '../../templates/card'
+import Card from '../../templates/Card'
 import { RxAvatar } from 'react-icons/rx'
 
 const UserCard = ({ user }: { user: User }) => {
