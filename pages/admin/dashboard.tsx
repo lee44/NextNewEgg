@@ -3,8 +3,11 @@ import React, { useState } from 'react'
 import prisma from '../../prisma/lib/prisma'
 import { Product, User, Session as Sessions } from '@prisma/client'
 import { serialize } from '../../utils/serialize'
-import MenuSideBar from '../../components/dashboard/aside/AsideMenu'
-import Overview from '../../layouts/Overview'
+import { getOverViewItems } from '../../constants/overViewItems'
+import SectionHeading from '../../components/dashboard/overview/SectionHeading'
+import SummaryCard from '../../components/dashboard/overview/SummaryCard'
+import UserCard from '../../components/dashboard/overview/UserCard'
+import { ProjectIcons } from '../../constants/projectIcons'
 
 export type DashboardType = {
   users: User[]
@@ -16,9 +19,34 @@ export type DashboardType = {
 }
 
 const Dashboard = (props: DashboardType) => {
+  const overViewItems = getOverViewItems(props)
+
   return (
-    <div className='min-h-[calc(100vh-64px)] p-4 mt-16 dark:bg-primary-bg'>
-      <Overview {...props} />
+    <div className='dark:bg-primary-bg'>
+      <SectionHeading Icon={ProjectIcons.overview} heading='Overview' />
+      <ul className='grid grid-cols-1 gap-2 mb-4 md:grid-cols-2 md:gap-4 md:gap-x-8 lg:grid-cols-3 xl:grid-cols-4'>
+        {overViewItems.map((overViewItem, index) => {
+          return (
+            <li key={index} className=''>
+              <SummaryCard
+                title={overViewItem.title}
+                icon={<overViewItem.icon color={overViewItem.color} size={40} />}
+                count={overViewItem.count?.toString()}
+              />
+            </li>
+          )
+        })}
+      </ul>
+      <SectionHeading Icon={ProjectIcons.users} heading='Users' />
+      <ul className='grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3'>
+        {props.users.map((user, index) => {
+          return (
+            <li key={index} className=''>
+              <UserCard user={user} />
+            </li>
+          )
+        })}
+      </ul>
     </div>
   )
 }

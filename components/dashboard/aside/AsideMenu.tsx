@@ -8,7 +8,7 @@ const AsideMenu = ({ setSidebar }: { setSidebar: React.Dispatch<React.SetStateAc
   const { pathname, query } = useRouter()
 
   return (
-    <div className='flex flex-col min-h-full gap-4 p-4 rounded-lg bg-tertiary-bg'>
+    <div className='flex flex-col h-[calc(100vh-112px)] gap-4 p-4 rounded-lg bg-tertiary-bg'>
       <h5 className='text-white'>SideBar</h5>
       {sidebarDashboardItems.map((item, index) => {
         return (

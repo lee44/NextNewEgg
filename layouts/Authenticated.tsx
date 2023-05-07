@@ -13,12 +13,18 @@ const Authenticated = ({ children }: { children: JSX.Element }) => {
   }
 
   return (
-    <div className='min-w-[368px]'>
+    <div className='min-w-[368px] min-h-screen'>
       <Navbar>
         <AdminItems />
       </Navbar>
-      <AsideMenu setSidebar={setSidebar} />
-      {children}
+      <div className='grid grid-cols-7 p-4 mt-20 gap-x-8'>
+        <div className='hidden col-span-1 xl:block '>
+          <AsideMenu setSidebar={setSidebar} />
+        </div>
+        <div className='col-span-7 xl:col-span-6'>
+          {children}
+        </div>
+      </div>
     </div>
   )
 }
