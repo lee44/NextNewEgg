@@ -7,7 +7,7 @@ import { DataProp } from '../../pages/admin/data'
 const Table = (prop: DataProp) => {
   const keys = Object.keys(prop.data[0])
   return (
-    <div className='container flex flex-col'>
+    <div className='flex flex-col w-full'>
       <SectionHeading Icon={BsTable} heading={prop.type} />
       <table className='block w-full overflow-x-scroll font-light text-left text-white rounded-md table-auto ext-sm overflow-x'>
         <thead className='font-medium bg-white border-b dark:border-neutral-500 dark:bg-neutral-600'>

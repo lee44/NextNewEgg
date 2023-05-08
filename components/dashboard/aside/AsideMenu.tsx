@@ -3,8 +3,9 @@ import { sidebarDashboardItems } from '../../../constants/sidebarDashboardItems'
 import IconLink from '../../ui/IconLink'
 import { useRouter } from 'next/router'
 import { FaArrowCircleLeft } from 'react-icons/fa'
+import { SideBarProp } from '../../../layouts/Authenticated'
 
-const AsideMenu = ({ setSidebar }: { setSidebar: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const AsideMenu = ({ hideSideBar, setHideSideBar }: SideBarProp) => {
   const { pathname, query } = useRouter()
 
   return (
@@ -23,16 +24,6 @@ const AsideMenu = ({ setSidebar }: { setSidebar: React.Dispatch<React.SetStateAc
           />
         )
       })}
-      <div className='flex justify-center mt-auto'>
-        <FaArrowCircleLeft
-          color='white'
-          size={30}
-          className='cursor-pointer'
-          onClick={() => {
-            setSidebar((sidebar: boolean) => !sidebar)
-          }}
-        />
-      </div>
     </div>
   )
 }
