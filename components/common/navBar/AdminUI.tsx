@@ -6,7 +6,7 @@ import { SideBarProp } from '../../../layouts/Authenticated'
 
 const AdminItems = ({ hideSideBar, setHideSideBar }: SideBarProp) => {
   return (
-    <div className='flex items-center justify-between p-2 px-6 min-h-[80px]'>
+    <div className='flex items-center justify-between p-2 px-6'>
       <div>
         <RxHamburgerMenu size={25} className={`xl:hidden dark:text-white cursor-pointer ${hideSideBar ? 'block' : 'xl:hidden'}`} onClick={() => {
           setHideSideBar((hideSideBar: boolean) => !hideSideBar)

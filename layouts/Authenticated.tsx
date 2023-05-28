@@ -2,7 +2,7 @@ import { useSession } from 'next-auth/react'
 import React, { useState } from 'react'
 import AsideMenu from '../components/dashboard/aside/AsideMenu'
 import Navbar from '../components/common/navbar/NavBar'
-import AdminItems from '../components/common/navbar/AdminItems'
+import AdminUI from '../components/common/navbar/AdminUI'
 
 export type SideBarProp = {
   hideSideBar: boolean
@@ -22,7 +22,7 @@ const Authenticated = ({ children }: { children: JSX.Element }) => {
       <div className='min-w-[368px] min-h-screen'>
         {hideSideBar && <div className='absolute inset-0 bg-gray-600 opacity-75'></div>}
         <Navbar>
-          <AdminItems hideSideBar={hideSideBar} setHideSideBar={setHideSideBar} />
+          <AdminUI hideSideBar={hideSideBar} setHideSideBar={setHideSideBar} />
         </Navbar>
         <div className='grid grid-cols-7 p-4 mt-20 gap-x-8'>
           <div className={`${hideSideBar ? 'absolute' : 'hidden col-span-1 xl:block'}`}>
