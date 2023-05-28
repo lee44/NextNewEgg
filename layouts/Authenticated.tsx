@@ -24,7 +24,7 @@ const Authenticated = ({ children }: { children: JSX.Element }) => {
         <Navbar>
           <AdminUI hideSideBar={hideSideBar} setHideSideBar={setHideSideBar} />
         </Navbar>
-        <div className='grid grid-cols-7 p-4 mt-20 gap-x-8'>
+        <div className='grid grid-cols-7 p-4 mt-[65px] gap-x-8'>
           <div className={`${hideSideBar ? 'absolute' : 'hidden col-span-1 xl:block'}`}>
             <AsideMenu hideSideBar={hideSideBar} setHideSideBar={setHideSideBar} />
           </div>
