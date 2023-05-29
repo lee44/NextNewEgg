@@ -3,6 +3,7 @@ import DarkModeToggler from './DarkModeToggler'
 import SignInOutButton from './SignInOutButton'
 import { RxHamburgerMenu } from 'react-icons/rx'
 import { SideBarProp } from '../../../layouts/Authenticated'
+import ProfileButton from './ProfileButton'
 
 const AdminItems = ({ hideSideBar, setHideSideBar }: SideBarProp) => {
   return (
@@ -14,7 +15,7 @@ const AdminItems = ({ hideSideBar, setHideSideBar }: SideBarProp) => {
       </div>
       <div className='flex items-center gap-6'>
         <DarkModeToggler />
-        <SignInOutButton />
+        <ProfileButton />
       </div>
     </div>
   )
